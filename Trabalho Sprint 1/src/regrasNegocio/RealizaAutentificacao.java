@@ -9,11 +9,11 @@ public class RealizaAutentificacao {
 	
 	public static boolean autentificarUsuario(Usuario usuario, UsuarioDao compradorDao)
 	{
-		
-		String login = usuario.getLogin();
+		return true;
+		/*String login = usuario.getLogin();
 		String senha = usuario.getSenha();
 		
-		List<Usuario> compradores = compradorDao.listarCompradores();
+		//List<Usuario> compradores = compradorDao.listarCompradores();
 		
 		//Verifica se usuário é administrador
 		if(login.equals("admin1") && senha.equals("admin1"))
@@ -49,6 +49,6 @@ public class RealizaAutentificacao {
 			}
 		}
 		
-		return false;		
+		return false;*/	
 	}
 }

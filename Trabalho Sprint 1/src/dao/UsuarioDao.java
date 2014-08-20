@@ -5,23 +5,15 @@ import interceptadores.AutorizacaoAdministradorInterceptador;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import javax.enterprise.context.Conversation;
-import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.interceptor.Interceptors;
 
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import modelo.Usuario;
-
 
 
 @Getter
@@ -34,7 +26,7 @@ public class UsuarioDao implements Serializable {
 
 	static List<Usuario> usuarios;
 	
-	private Usuario compradorNovo = new Usuario();
+	
 	
 	private static UsuarioDao usuarioDaoInstance;
 	
@@ -83,17 +75,15 @@ public class UsuarioDao implements Serializable {
 				throw new Exception();
 		}
 		
-		this.compradorNovo.setPapel("comprador");
-		this.usuarios.add(this.compradorNovo);
-		this.compradorNovo = new Usuario();
+		this.usuarios.add(compradorNovo);		
 	}
 	
 	//Exclui comprador
 	//@Interceptors(AutorizacaoAdministradorInterceptador.class)
-	public void excluirComprador(Usuario compradorADeletar) throws Exception{
+	public void excluirComprador(String login) throws Exception{
 		
 		for (Usuario comprador : usuarios) {
-			if(comprador.getLogin().equals(compradorADeletar.getLogin()))
+			if(comprador.getLogin().equals(login))
 				this.usuarios.remove(comprador);
 			else
 				throw new Exception();
@@ -102,8 +92,18 @@ public class UsuarioDao implements Serializable {
 
 	//Lista os compradores
 	//@Interceptors(AutorizacaoAdministradorInterceptador.class)
-	public List<Usuario> listarCompradores(){
-		return this.usuarios;
+	public List<Usuario> listarCompradores() throws Exception{
+		
+		List<Usuario> compradores = new ArrayList<>();
+		
+		for (Usuario comprador : usuarios) {
+			if(comprador.getPapel().equals("comprador"))
+				compradores.add(comprador);
+			else
+				throw new Exception();
+		}
+		
+		return compradores;
 	}
 	
 	//Editar Comprador
@@ -111,6 +111,5 @@ public class UsuarioDao implements Serializable {
 	public void editarComprador(Usuario comprador){
 		
 	}
-
 	
 }
