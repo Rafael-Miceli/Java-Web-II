@@ -42,8 +42,8 @@ public class InicializaAdministradores implements Serializable {
 		//Instancia primeiro administrador
 		Usuario admin1 = new Usuario();
 		admin1.setNome("Ricardo");
-		admin1.setLogin("admin1");
-		admin1.setSenha("admin1");
+		admin1.setLogin("admin");
+		admin1.setSenha("admin");
 		admin1.setPapel("admin");
 		
 		//Instancia segundo administrador

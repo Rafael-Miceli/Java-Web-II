@@ -11,8 +11,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import dao.CompradorDao;
 import dao.InicializaAdministradores;
+import dao.UsuarioDao;
 import regrasNegocio.RealizaAutentificacao;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,10 +27,9 @@ public class ControleLogin implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private InicializaAdministradores inicializaAdministradores;
+	private InicializaAdministradores inicializaAdministradores;	
 	
-	@Inject
-	private CompradorDao compradorDao;
+	private UsuarioDao usuarioDao;
 	
 	@Inject
 	private Usuario usuario;
@@ -42,52 +41,26 @@ public class ControleLogin implements Serializable {
 	
 	//Método que realiza o login
 	public String realizarLogin()
-	{	
-		/*if(RealizaAutentificacao.autentificarUsuario(this.usuario, this.compradorDao)){
-			return "paginaConstrucao";
-		}
-		return "falha";*/
+	{			
+		usuarioDao = UsuarioDao.Create();
 		
 		String login = usuario.getLogin();
 		String senha = usuario.getSenha();
 		
-		//List<Usuario> compradores = compradorDao.listarCompradores();
+		Usuario usuario = usuarioDao.buscarUsuarioPorLogin(login);				
 		
-		//Verifica se usuário é administrador
-		if(login.equals("admin") && senha.equals("admin"))
-		{	
-			usuario.setPapel("admin");		
-			return "paginaConstrucao";
+		//Verifica se usuário existe, e se existir, verifica se sua senha está correta
+		if (usuario != null && usuario.getSenha().equals(senha))
+		{
+			//Verifica se usuário é administrador
+			if (usuario.getPapel().equals("admin"))
+				return "listaCompradores";
+			else
+				return "paginaContrucao";			
+					
 		}
-		/*else if(login.equals("admin2") && senha.equals("admin2"))
-		{
-			usuario.setPapel("admin");		
-			return "paginaConstrucao";
-		}*/
-		//verifica se usuário é comprador
-		/*else if(verificaLoginSenhaDeCompradores(login, senha))
-		{
-			usuario.setPapel("comprador");		
-			return "paginaConstrucao";
-		}*/
 		else
-		{
-			return "falha";
-		}
-	}
-	
-	private boolean verificaLoginSenhaDeCompradores(String login, String senha, List<Usuario> compradores)
-	{
+			return "falha";			
 		
-		for (Usuario comprador : compradores) {
-			if(login.equals(comprador.getLogin())
-					&& senha.equals(comprador.getSenha()))
-			{
-				return true;
-			}
-		}
-		
-		return false;		
-	}
-	
+	}	
 }

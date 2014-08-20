@@ -2,12 +2,12 @@ package regrasNegocio;
 
 import java.util.List;
 
-import dao.CompradorDao;
+import dao.UsuarioDao;
 import modelo.Usuario;
 
 public class RealizaAutentificacao {
 	
-	public static boolean autentificarUsuario(Usuario usuario, CompradorDao compradorDao)
+	public static boolean autentificarUsuario(Usuario usuario, UsuarioDao compradorDao)
 	{
 		
 		String login = usuario.getLogin();
