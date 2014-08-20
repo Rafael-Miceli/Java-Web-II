@@ -39,7 +39,7 @@ public class ControleLogin implements Serializable {
 	private ResourceBundle messages;
 
 	
-	//MÈtodo que realiza o login
+	//M√©todo que realiza o login
 	public String realizarLogin()
 	{			
 		usuarioDao = UsuarioDao.Create();
@@ -49,10 +49,10 @@ public class ControleLogin implements Serializable {
 		
 		Usuario usuario = usuarioDao.buscarUsuarioPorLogin(login);				
 		
-		//Verifica se usu·rio existe, e se existir, verifica se sua senha est· correta
+		//Verifica se usu√°rio existe, e se existir, verifica se sua senha est√° correta
 		if (usuario != null && usuario.getSenha().equals(senha))
 		{
-			//Verifica se usu·rio È administrador
+			//Verifica se usu√°rio √© administrador
 			if (usuario.getPapel().equals("admin"))
 				return "listaCompradores";
 			else
@@ -62,5 +62,10 @@ public class ControleLogin implements Serializable {
 		else
 			return "falha";			
 		
-	}	
+	}
+	
+	public String sairSistema(){
+		usuario.setPapel("null");
+		return "login";
+	}
 }
