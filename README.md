@@ -19,9 +19,11 @@ Galera como definido as divisões até este momento são:
 
   Tarefa de remover usuários
   
+-
+-
 Lembrando que ainda falta a tarefa de "atualizar" usuários.
 
-Os toques finais vamos revisar após terminarmos o core.
+Os toques finais vamos revisar após terminarmos o *core*.
 
 Lembrem-se também que as tarefas estão dividas em um modelo vertical, ou seja,
 
