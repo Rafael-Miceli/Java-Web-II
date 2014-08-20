@@ -34,6 +34,8 @@ public class UsuarioDao implements Serializable {
 
 	static List<Usuario> usuarios;
 	
+	private Usuario compradorNovo = new Usuario();
+	
 	private static UsuarioDao usuarioDaoInstance;
 	
 	public UsuarioDao()
@@ -74,14 +76,16 @@ public class UsuarioDao implements Serializable {
 	
 	//Adiciona Comprador
 	//@Interceptors(AutorizacaoAdministradorInterceptador.class)
-	public void adicionarComprador(Usuario compradorNovo) throws Exception{
+	public void adicionarComprador() throws Exception{
 		
-		for (Usuario comprador : usuarios) {
-			if(comprador.getNome().equals(compradorNovo.getNome()))
+		for (Usuario comprador : compradores) {
+			if(comprador.getLogin().equals(compradorNovo.getLogin()))
 				throw new Exception();
 		}
 		
-		this.usuarios.add(compradorNovo);
+		this.compradorNovo.setPapel("comprador");
+		this.compradores.add(this.compradorNovo);
+		this.compradorNovo = new Usuario();
 	}
 	
 	//Exclui comprador
