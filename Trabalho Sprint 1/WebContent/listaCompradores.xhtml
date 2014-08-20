@@ -5,10 +5,42 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<ui:define name="conteudo">
+			
+		<h2>Lista de Compradores</h2>	
 					
-		<h1>Lista de Compradores</h1>
+		<h:dataTable value="#{compradorDao.compradores}" var="comprador"
+			rendered="#{not empty compradorDao.compradores}"  >
 		
+			<f:facet name="header">Lista de Compradores</f:facet>
+			
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				<h:outputText value="#{comprador.nome}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Data de Nascimento</f:facet>
+				<h:outputText value="#{comprador.dataNascimento}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>				
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Email</f:facet>
+				<h:outputText value="#{comprador.email}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Login</f:facet>
+				<h:outputText value="#{comprador.login}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Senha</f:facet>
+				<h:outputText value="#{comprador.senha}" />
+			</h:column>
 		
+		</h:dataTable>
 
 	</ui:define>
 </ui:composition>
