@@ -76,15 +76,15 @@ public class UsuarioDao implements Serializable {
 	
 	//Adiciona Comprador
 	//@Interceptors(AutorizacaoAdministradorInterceptador.class)
-	public void adicionarComprador() throws Exception{
+	public void adicionarComprador(Usuario compradorNovo) throws Exception{
 		
-		for (Usuario comprador : compradores) {
+		for (Usuario comprador : usuarios) {
 			if(comprador.getLogin().equals(compradorNovo.getLogin()))
 				throw new Exception();
 		}
 		
 		this.compradorNovo.setPapel("comprador");
-		this.compradores.add(this.compradorNovo);
+		this.usuarios.add(this.compradorNovo);
 		this.compradorNovo = new Usuario();
 	}
 	
