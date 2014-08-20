@@ -14,13 +14,13 @@
 
 				<tr>
 					<td>Nome</td>
-					<td><h:inputText value="#{compradorDao.compradorNovo.nome}"
+					<td><h:inputText value="#{UsuarioDao.compradorNovo.nome}"
 							required="true"
 							requiredMessage="nome obrigatorio" /></td>
 				</tr>			
 				<tr>
 					<td>Data de Nascimento</td>
-					<td><h:inputText value="#{compradorDao.compradorNovo.dataNascimento}"
+					<td><h:inputText value="#{UsuarioDao.compradorNovo.dataNascimento}"
 							required="true" 
 							requiredMessage="data obrigatorio">
 						
@@ -31,7 +31,7 @@
 				</tr>
 				<tr>
 					<td>Email</td>
-					<td><h:inputText value="#{compradorDao.compradorNovo.email}"
+					<td><h:inputText value="#{UsuarioDao.compradorNovo.email}"
 							required="true" 
 							requiredMessage="login obrigatorio"
 							validatorMessage="E-mail incorreto">
@@ -43,19 +43,19 @@
 				</tr>
 				<tr>
 					<td>Login</td>
-					<td><h:inputText value="#{compradorDao.compradorNovo.login}"
+					<td><h:inputText value="#{UsuarioDao.compradorNovo.login}"
 							required="true" 
 							requiredMessage="login obrigatorio"/></td>
 				</tr>			
 				<tr>
 					<td>Senha</td>
-					<td><h:inputText value="#{compradorDao.compradorNovo.senha}"
+					<td><h:inputText value="#{UsuarioDao.compradorNovo.senha}"
 							required="true" 
 							requiredMessage="senha obrigatorio"/></td>
 				</tr>
 				<tr>
 					<td><h:commandButton value="Logar"
-							action="#{compradorDao.adicionarComprador}" /></td>
+							action="#{UsuarioDao.adicionarComprador}" /></td>
 				</tr>
 
 			</table>

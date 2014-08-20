@@ -90,8 +90,14 @@ public class UsuarioDao implements Serializable {
 	
 	//Exclui comprador
 	//@Interceptors(AutorizacaoAdministradorInterceptador.class)
-	public void excluirComprador(Usuario comprador){
-		this.usuarios.remove(comprador);
+	public void excluirComprador(Usuario compradorADeletar) throws Exception{
+		
+		for (Usuario comprador : usuarios) {
+			if(comprador.getLogin().equals(compradorADeletar.getLogin()))
+				this.usuarios.remove(comprador);
+			else
+				throw new Exception();
+		}
 	}
 
 	//Lista os compradores
