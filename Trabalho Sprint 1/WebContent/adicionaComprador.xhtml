@@ -8,7 +8,61 @@
 					
 		<h1>Adiciona Comprador</h1>
 		
-		
+		<h2>#{msg['formulario.login']}</h2>
+		<h:form>
+			<table border="1">
+
+				<tr>
+					<td>Nome</td>
+					<td><h:inputText value="#{compradorDao.compradorNovo.nome}"
+							required="true"
+							requiredMessage="nome obrigatorio" /></td>
+				</tr>			
+				<tr>
+					<td>Data de Nascimento</td>
+					<td><h:inputText value="#{compradorDao.compradorNovo.dataNascimento}"
+							required="true" 
+							requiredMessage="data obrigatorio">
+						
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						
+						</h:inputText>		
+					</td>
+				</tr>
+				<tr>
+					<td>Email</td>
+					<td><h:inputText value="#{compradorDao.compradorNovo.email}"
+							required="true" 
+							requiredMessage="login obrigatorio"
+							validatorMessage="E-mail incorreto">
+						
+							<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+							
+						</h:inputText>		
+					</td>
+				</tr>
+				<tr>
+					<td>Login</td>
+					<td><h:inputText value="#{compradorDao.compradorNovo.login}"
+							required="true" 
+							requiredMessage="login obrigatorio"/></td>
+				</tr>			
+				<tr>
+					<td>Senha</td>
+					<td><h:inputText value="#{compradorDao.compradorNovo.senha}"
+							required="true" 
+							requiredMessage="senha obrigatorio"/></td>
+				</tr>
+				<tr>
+					<td><h:commandButton value="Logar"
+							action="#{compradorDao.adicionarComprador}" /></td>
+				</tr>
+
+			</table>
+
+		</h:form>
+
+		<h:messages />
 
 	</ui:define>
 </ui:composition>
