@@ -70,8 +70,7 @@ public class UsuarioDao implements Serializable {
 		}
 		
 		return null;
-	}
-	
+	}	
 	
 	//Adiciona Comprador
 	//@Interceptors(AutorizacaoAdministradorInterceptador.class)
