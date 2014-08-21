@@ -17,30 +17,7 @@
 					<td><h:inputText value="#{controleUsuario.usuario.nome}"
 							required="true"
 							requiredMessage="nome obrigatorio" /></td>
-				</tr>			
-				<tr>
-					<td>Data de Nascimento</td>
-					<td><h:inputText value="#{controleUsuario.usuario.dataNascimento}"
-							required="true" 
-							requiredMessage="data obrigatorio">
-						
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-						
-						</h:inputText>		
-					</td>
-				</tr>
-				<tr>
-					<td>Email</td>
-					<td><h:inputText value="#{controleUsuario.usuario.email}"
-							required="true" 
-							requiredMessage="login obrigatorio"
-							validatorMessage="E-mail incorreto">
-						
-							<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
-							
-						</h:inputText>		
-					</td>
-				</tr>
+				</tr>				
 				<tr>
 					<td>Login</td>
 					<td><h:inputText value="#{controleUsuario.usuario.login}"

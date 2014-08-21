@@ -39,8 +39,15 @@ public class UsuarioDao {
 		admin.setSenha("admin");
 		admin.setPapel("admin");
 		
+		Usuario comprador = new Usuario();
+		comprador.setNome("Rafael");
+		comprador.setLogin("rafael");
+		comprador.setSenha("teste");
+		comprador.setPapel("comprador");
+		
 		
 		usuarios.add(admin);
+		usuarios.add(comprador);
 	}
 	
 	public Usuario buscarUsuarioPorLogin(String login) {
