@@ -35,12 +35,14 @@ public class ControleUsuario implements Serializable {
 		usuarioDao = UsuarioDao.Create();
 	}
 	
+	//Adiciona Comprador
 	@Interceptors(AutorizacaoAdministradorInterceptador.class)
 	public void adicionarComprador() throws Exception {
 		usuario.setPapel("comprador");
 		usuarioDao.adicionarComprador(usuario);
 	}
 	
+	//Adiciona Administrador
 	@Interceptors(AutorizacaoAdministradorInterceptador.class)
 	public void adicionarAdministrador() throws Exception {
 		usuario.setPapel("admin");
@@ -61,7 +63,7 @@ public class ControleUsuario implements Serializable {
 
 	// Editar Comprador
 	@Interceptors(AutorizacaoAdministradorInterceptador.class)
-	public void editarComprador(Usuario comprador) {
+	public void editarComprador() {
 		usuarioDao.editarComprador(usuario);
 	}
 
