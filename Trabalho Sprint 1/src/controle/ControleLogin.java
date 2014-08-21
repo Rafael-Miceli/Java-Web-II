@@ -8,12 +8,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import dao.InicializaAdministradores;
 import dao.UsuarioDao;
-import regrasNegocio.RealizaAutentificacao;
 import lombok.Getter;
 import lombok.Setter;
 import modelo.Usuario;
@@ -24,10 +23,7 @@ import modelo.Usuario;
 @RequestScoped
 public class ControleLogin implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
-	
-	@Inject
-	private InicializaAdministradores inicializaAdministradores;	
+	private static final long serialVersionUID = 1L;		
 	
 	private UsuarioDao usuarioDao;
 	
@@ -52,8 +48,11 @@ public class ControleLogin implements Serializable {
 		//Verifica se usuário existe, e se existir, verifica se sua senha está correta
 		if (usuario != null && usuario.getSenha().equals(senha))
 		{
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.getExternalContext().getSessionMap().put("user", usuario);
+			
 			//Verifica se usuário é administrador
-			if (usuario.getPapel().equals("admin"))
+			if (usuario.getPapel().equals("admin"))				
 				return "listaCompradores";
 			else
 				return "paginaContrucao";			
@@ -65,7 +64,7 @@ public class ControleLogin implements Serializable {
 	}
 	
 	public String sairSistema(){
-		usuario.setPapel("null");
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		return "login";
 	}
 }

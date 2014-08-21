@@ -1,15 +1,7 @@
 package dao;
 
-import interceptadores.AutorizacaoAdministradorInterceptador;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.interceptor.Interceptors;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,15 +10,9 @@ import modelo.Usuario;
 
 @Getter
 @Setter
-@Named
-@SessionScoped
-public class UsuarioDao implements Serializable {
+public class UsuarioDao {
 
-	private static final long serialVersionUID = 1L;
-
-	static List<Usuario> usuarios;
-	
-	
+	static List<Usuario> usuarios;	
 	
 	private static UsuarioDao usuarioDaoInstance;
 	
@@ -67,7 +53,6 @@ public class UsuarioDao implements Serializable {
 	}	
 	
 	//Adiciona Comprador
-	//@Interceptors(AutorizacaoAdministradorInterceptador.class)
 	public void adicionarComprador(Usuario compradorNovo) throws Exception{
 		
 		for (Usuario comprador : usuarios) {
@@ -79,7 +64,6 @@ public class UsuarioDao implements Serializable {
 	}
 	
 	//Exclui comprador
-	//@Interceptors(AutorizacaoAdministradorInterceptador.class)
 	public void excluirComprador(String login) throws Exception{
 		
 		for (Usuario comprador : usuarios) {
@@ -91,7 +75,6 @@ public class UsuarioDao implements Serializable {
 	}
 
 	//Lista os compradores
-	//@Interceptors(AutorizacaoAdministradorInterceptador.class)
 	public List<Usuario> listarCompradores() throws Exception{
 		
 		List<Usuario> compradores = new ArrayList<>();
@@ -107,7 +90,6 @@ public class UsuarioDao implements Serializable {
 	}
 	
 	//Editar Comprador
-	//@Interceptors(AutorizacaoAdministradorInterceptador.class)
 	public void editarComprador(Usuario comprador){
 		
 	}
