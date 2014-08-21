@@ -86,12 +86,9 @@ public class UsuarioDao {
 		
 		List<Usuario> compradores = new ArrayList<>();
 		
-		for (Usuario comprador : usuarios) {
+		for (Usuario comprador : usuarios) 
 			if(comprador.getPapel().equals("comprador"))
 				compradores.add(comprador);
-			else
-				throw new Exception();
-		}
 		
 		return compradores;
 	}

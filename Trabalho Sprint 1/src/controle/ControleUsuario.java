@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.annotation.ManagedBean;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -26,22 +27,29 @@ public class ControleUsuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@Inject
+	
 	private Usuario usuario;
-		
+	
+	
+	private Usuario novoUsuario = new Usuario();
+	
+	
 	private List<Usuario> listaCompradores;
 	
 	UsuarioDao usuarioDao;
 	
-	public ControleUsuario() {
+	public ControleUsuario() throws Exception {
 		usuarioDao = UsuarioDao.Create();
+		listarCompradores();
 	}
 	
 	//Adiciona Comprador
 	@Interceptors(AutorizacaoAdministradorInterceptador.class)
-	public void adicionarComprador() throws Exception {
-		usuario.setPapel("comprador");
-		usuarioDao.adicionarComprador(usuario);
+	public String adicionarComprador() throws Exception {
+		novoUsuario.setPapel("comprador");
+		usuarioDao.adicionarComprador(novoUsuario);
+		listarCompradores();
+		return "listaCompradores";
 	}
 	
 	//Adiciona Administrador
