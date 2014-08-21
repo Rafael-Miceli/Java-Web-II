@@ -2,6 +2,7 @@ package interceptadores;
 
 import java.io.Serializable;
 
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
@@ -20,7 +21,10 @@ public class AutorizacaoInterceptador implements Serializable {
 	@AroundInvoke
 	public Object interceptar(InvocationContext contexto) throws Exception {
 		
-		if (this.usuario.getPapel() != null && ("admin".equals(this.usuario.getPapel())	|| "comprador".equals(this.usuario.getPapel())))
+		FacesContext context = FacesContext.getCurrentInstance();
+		usuario = (Usuario)context.getExternalContext().getSessionMap().get("user");
+		
+		if (usuario != null && usuario.getPapel().equals("comprador"))
 			return contexto.proceed();
 		
 		throw new RuntimeException("Permissão negada");

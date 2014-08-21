@@ -21,7 +21,7 @@ public class AutorizacaoAdministradorInterceptador implements Serializable{
 		FacesContext context = FacesContext.getCurrentInstance();
 		usuario = (Usuario)context.getExternalContext().getSessionMap().get("user");
 			
-		if(usuario != null)	
+		if(usuario != null && usuario.getPapel().equals("admin"))	
 			return contexto.proceed();
 		
 		throw new RuntimeException("Permissão negada");

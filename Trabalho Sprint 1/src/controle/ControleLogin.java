@@ -55,7 +55,7 @@ public class ControleLogin implements Serializable {
 			if (usuario.getPapel().equals("admin"))				
 				return "listaCompradores";
 			else
-				return "paginaContrucao";			
+				return "paginaConstrucao";			
 					
 		}
 		else
