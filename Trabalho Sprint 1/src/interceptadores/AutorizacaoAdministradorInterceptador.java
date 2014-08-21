@@ -8,11 +8,12 @@ import javax.interceptor.InvocationContext;
 
 import modelo.Usuario;
 
-//Somente usu·rio com perfil admin passa por ele
+//Somente usu√°rio com perfil admin passa por ele
 public class AutorizacaoAdministradorInterceptador implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
+	@Inject
 	Usuario usuario;
 
 	@AroundInvoke
@@ -24,6 +25,6 @@ public class AutorizacaoAdministradorInterceptador implements Serializable{
 		if(usuario != null && usuario.getPapel().equals("admin"))	
 			return contexto.proceed();
 		
-		throw new RuntimeException("Permiss„o negada");
+		throw new RuntimeException("Permiss√£o negada");
 	}
 }
