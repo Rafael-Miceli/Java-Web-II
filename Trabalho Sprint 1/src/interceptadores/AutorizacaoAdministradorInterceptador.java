@@ -3,6 +3,7 @@ package interceptadores;
 import java.io.Serializable;
 
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
