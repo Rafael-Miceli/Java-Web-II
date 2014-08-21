@@ -10,8 +10,8 @@
 		
 		<h:link value="Adicionar comprador" outcome="adicionaComprador" />
 					
-		<h:dataTable value="#{controleUsuario.listaCompradores}" var="comprador"
-			rendered="#{not empty controleUsuario.listaCompradores}"  >
+		<h:dataTable value="#{controleUsuario.listaCompradores()}" var="comprador"
+			rendered="#{not empty controleUsuario.listaCompradores()}"  >
 		
 			<f:facet name="header">Lista de Compradores</f:facet>
 			
