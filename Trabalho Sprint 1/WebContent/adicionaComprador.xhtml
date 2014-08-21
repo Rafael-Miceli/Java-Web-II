@@ -14,13 +14,13 @@
 
 				<tr>
 					<td>Nome</td>
-					<td><h:inputText value="#{ControleUsuario.usuario.nome}"
+					<td><h:inputText value="#{controleUsuario.usuario.nome}"
 							required="true"
 							requiredMessage="nome obrigatorio" /></td>
 				</tr>			
 				<tr>
 					<td>Data de Nascimento</td>
-					<td><h:inputText value="#{ControleUsuario.usuario.dataNascimento}"
+					<td><h:inputText value="#{controleUsuario.usuario.dataNascimento}"
 							required="true" 
 							requiredMessage="data obrigatorio">
 						
@@ -31,7 +31,7 @@
 				</tr>
 				<tr>
 					<td>Email</td>
-					<td><h:inputText value="#{ControleUsuario.usuario.email}"
+					<td><h:inputText value="#{controleUsuario.usuario.email}"
 							required="true" 
 							requiredMessage="login obrigatorio"
 							validatorMessage="E-mail incorreto">
@@ -43,19 +43,19 @@
 				</tr>
 				<tr>
 					<td>Login</td>
-					<td><h:inputText value="#{ControleUsuario.usuario.login}"
+					<td><h:inputText value="#{controleUsuario.usuario.login}"
 							required="true" 
 							requiredMessage="login obrigatorio"/></td>
 				</tr>			
 				<tr>
 					<td>Senha</td>
-					<td><h:inputText value="#{ControleUsuario.usuario.senha}"
+					<td><h:inputText value="#{controleUsuario.usuario.senha}"
 							required="true" 
 							requiredMessage="senha obrigatorio"/></td>
 				</tr>
 				<tr>
 					<td><h:commandButton value="Logar"
-							action="#{ControleUsuario.adicionarComprador}" /></td>
+							action="#{controleUsuario.adicionarComprador}" /></td>
 				</tr>
 
 			</table>

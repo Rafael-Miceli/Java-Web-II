@@ -2,21 +2,20 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import lombok.Getter;
 import lombok.Setter;
 import modelo.Usuario;
 
 
-@Getter
-@Setter
 public class UsuarioDao {
 
 	static List<Usuario> usuarios;	
 	
 	private static UsuarioDao usuarioDaoInstance;
 	
-	public UsuarioDao()
+	private UsuarioDao()
 	{
 		CriarAdmin();
 	}
@@ -32,13 +31,14 @@ public class UsuarioDao {
 	}
 	
 	private static void CriarAdmin() {
-		usuarios = new ArrayList();
+		usuarios = new ArrayList<Usuario>();
 		
 		Usuario admin = new Usuario();
 		admin.setNome("Ricardo");
 		admin.setLogin("admin");
 		admin.setSenha("admin");
 		admin.setPapel("admin");
+		
 		
 		usuarios.add(admin);
 	}

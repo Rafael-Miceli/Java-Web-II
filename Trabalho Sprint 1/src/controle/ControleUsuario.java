@@ -28,6 +28,8 @@ public class ControleUsuario implements Serializable {
 	
 	@Inject
 	private Usuario usuario;
+		
+	private List<Usuario> listaCompradores;
 	
 	UsuarioDao usuarioDao;
 	
@@ -58,7 +60,8 @@ public class ControleUsuario implements Serializable {
 	// Lista os compradores
 	@Interceptors(AutorizacaoAdministradorInterceptador.class)
 	public List<Usuario> listarCompradores() throws Exception {
-		return usuarioDao.listarCompradores();
+		listaCompradores = usuarioDao.listarCompradores();		
+		return listaCompradores;
 	}
 
 	// Editar Comprador

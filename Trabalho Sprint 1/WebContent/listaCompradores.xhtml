@@ -7,9 +7,11 @@
 	<ui:define name="conteudo">
 			
 		<h2>Lista de Compradores</h2>	
+		
+		<h:link value="Adicionar comprador" outcome="adicionaComprador" />
 					
-		<h:dataTable value="#{controleUsuario.listarCompradores}" var="comprador"
-			rendered="#{not empty controleUsuario.listarCompradores}"  >
+		<h:dataTable value="#{controleUsuario.listaCompradores}" var="comprador"
+			rendered="#{not empty controleUsuario.listaCompradores}"  >
 		
 			<f:facet name="header">Lista de Compradores</f:facet>
 			
