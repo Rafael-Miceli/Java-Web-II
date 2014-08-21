@@ -8,8 +8,8 @@
 			
 		<h2>Lista de Compradores</h2>	
 					
-		<h:dataTable value="#{ControleUsuario.usuario}" var="comprador"
-			rendered="#{not empty ControleUsuario.usuario}"  >
+		<h:dataTable value="#{controleUsuario.listarCompradores}" var="comprador"
+			rendered="#{not empty controleUsuario.listarCompradores}"  >
 		
 			<f:facet name="header">Lista de Compradores</f:facet>
 			
