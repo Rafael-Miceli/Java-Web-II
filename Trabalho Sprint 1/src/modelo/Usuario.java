@@ -31,6 +31,11 @@ public class Usuario implements Serializable {
 	@Size(min = 3, max = 50,  message = "{nome.tamanho}")
 	private String nome;
 	
+	private Date dataNascimento;
+	
+	@NonNull
+	private String email;
+	
 	@NonNull
 	@Size(max = 10, message = "{login.tamanho.minimo}")
 	private String login;
