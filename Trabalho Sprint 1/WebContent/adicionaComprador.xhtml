@@ -10,29 +10,29 @@
 		
 		<h2>#{msg['formulario.login']}</h2>
 		<h:form>
-			<table border="1">
-
+			<table border="1">				
+				
 				<tr>
 					<td>Nome</td>
-					<td><h:inputText value="#{controleUsuario.novoUsuario.nome}"
+					<td><h:inputText value="#{controleUsuario.usuarioSelecionado.nome}"
 							required="true"
 							requiredMessage="nome obrigatorio" /></td>
 				</tr>				
 				<tr>
 					<td>Login</td>
-					<td><h:inputText value="#{controleUsuario.novoUsuario.login}"
+					<td><h:inputText value="#{controleUsuario.usuarioSelecionado.login}"
 							required="true" 
 							requiredMessage="login obrigatorio"/></td>
 				</tr>			
 				<tr>
 					<td>Senha</td>
-					<td><h:inputText value="#{controleUsuario.novoUsuario.senha}"
+					<td><h:inputText value="#{controleUsuario.usuarioSelecionado.senha}"
 							required="true" 
 							requiredMessage="senha obrigatorio"/></td>
 				</tr>
 				<tr>
-					<td><h:commandButton value="Logar"
-							action="#{controleUsuario.adicionarComprador()}" /></td>
+					<td><h:commandButton value="Salvar"
+							action="#{controleUsuario.salvar()}" /></td>
 				</tr>
 
 			</table>

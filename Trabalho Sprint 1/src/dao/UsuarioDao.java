@@ -71,14 +71,10 @@ public class UsuarioDao {
 	}
 	
 	//Exclui comprador
-	public void excluirComprador(String login) throws Exception{
+	public void excluirComprador(Usuario comprador) throws Exception{
 		
-		for (Usuario comprador : usuarios) {
-			if(comprador.getLogin().equals(login))
-				this.usuarios.remove(comprador);
-			else
-				throw new Exception();
-		}
+		this.usuarios.remove(comprador);		
+		
 	}
 
 	//Lista os compradores

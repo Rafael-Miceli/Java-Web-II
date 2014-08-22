@@ -22,60 +22,74 @@ import dao.UsuarioDao;
 @Getter
 @Setter
 @Named
-@SessionScoped
-public class ControleUsuario implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-	
+@RequestScoped
+public class ControleUsuario implements Serializable {	
 	
 	private Usuario usuario;
 	
+	private Usuario usuarioSelecionado = new Usuario();	
 	
-	private Usuario novoUsuario = new Usuario();
+	private List<Usuario> listaCompradores = null;
 	
-	
-	private List<Usuario> listaCompradores;
-	
-	UsuarioDao usuarioDao;
+	private UsuarioDao usuarioDao;
 	
 	public ControleUsuario() throws Exception {
 		usuarioDao = UsuarioDao.Create();
 		listarCompradores();
 	}
 	
-	//Adiciona Comprador
-	@Interceptors(AutorizacaoAdministradorInterceptador.class)
-	public String adicionarComprador() throws Exception {
-		novoUsuario.setPapel("comprador");
-		usuarioDao.adicionarComprador(novoUsuario);
+	public String salvar() throws Exception {
+		usuarioSelecionado.setPapel("comprador");
+		usuarioDao.adicionarComprador(usuarioSelecionado);
 		listarCompradores();
 		return "listaCompradores";
 	}
 	
-	//Adiciona Administrador
-	@Interceptors(AutorizacaoAdministradorInterceptador.class)
-	public void adicionarAdministrador() throws Exception {
-		usuario.setPapel("admin");
-		usuarioDao.adicionarComprador(usuario);
+	public String cancelar(){
+		return "adicionaComprador";
 	}
-
+	
+	//Adiciona Comprador
+	@Interceptors(AutorizacaoAdministradorInterceptador.class)
+	public String adicionarComprador() throws Exception {
+		usuarioSelecionado = new Usuario();
+		
+		return "adicionaComprador";
+	}
+	
 	// Exclui comprador
 	@Interceptors(AutorizacaoAdministradorInterceptador.class)
-	public void excluirComprador() throws Exception {
-		usuarioDao.excluirComprador(usuario.getLogin());
+	public String excluirComprador() throws Exception {
+		usuarioDao.excluirComprador(usuarioSelecionado);
+		listarCompradores();
+		return "listaCompradores";
 	}
 
 	// Lista os compradores
 	@Interceptors(AutorizacaoAdministradorInterceptador.class)
 	public List<Usuario> listarCompradores() throws Exception {
+		
 		listaCompradores = usuarioDao.listarCompradores();		
 		return listaCompradores;
+	}
+	
+	@Interceptors(AutorizacaoAdministradorInterceptador.class)
+	public void setListarCompradores(List<Usuario> listarCompradores){
+		this.listaCompradores = listarCompradores; 
+	}
+	
+	public Usuario getUsuarioSelecionado(){
+		return usuarioSelecionado;
+	}
+	
+	public void setUsuarioSelecionado(Usuario usuarioSelecionado){
+		this.usuarioSelecionado = usuarioSelecionado;
 	}
 
 	// Editar Comprador
 	@Interceptors(AutorizacaoAdministradorInterceptador.class)
-	public void editarComprador() {
-		usuarioDao.editarComprador(usuario);
+	public String editarComprador() {
+		return "adicionaComprador";
 	}
 
 }

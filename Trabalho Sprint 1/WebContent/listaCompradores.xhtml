@@ -7,25 +7,42 @@
 	<ui:define name="conteudo">
 			
 		<h2>Lista de Compradores</h2>	
-		
-		<h:link value="Adicionar comprador" outcome="adicionaComprador" />
-					
-		<h:dataTable value="#{controleUsuario.listaCompradores()}" var="comprador"
-			rendered="#{not empty controleUsuario.listaCompradores()}"  >
-		
-			<f:facet name="header">Lista de Compradores</f:facet>
+		<h:form>
+			<h:commandButton value="Adicionar Comprador" action="#{controleUsuario.adicionarComprador()}" />
+						
+			<h:dataTable value="#{controleUsuario.listaCompradores}" var="comprador"
+				rendered="#{not empty controleUsuario.listaCompradores}"  >
 			
-			<h:column>
-				<f:facet name="header">Nome</f:facet>
-				<h:outputText value="#{comprador.nome}" />
-			</h:column>					
-			
-			<h:column>
-				<f:facet name="header">Login</f:facet>
-				<h:outputText value="#{comprador.login}" />
-			</h:column>			
-		
-		</h:dataTable>
+				<f:facet name="header">Lista de Compradores</f:facet>
+				
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					<h:outputText value="#{comprador.nome}" />
+				</h:column>					
+				
+				<h:column>
+					<f:facet name="header">Login</f:facet>
+					<h:outputText value="#{comprador.login}" />
+				</h:column>			
+				
+				<h:column headerText="Acoes"> 
+ 					   
+ 				<h:commandLink value="Editar" action="#{controleUsuario.editarComprador()}"> 
+ 					<f:setPropertyActionListener value="#{comprador}" 
+ 												 target="#{controleUsuario.usuarioSelecionado}" /> 
+ 				</h:commandLink> 				 
+ 				 
+ 				<h:outputLabel value=" "/> 
+ 				 
+ 				<h:commandLink value="Remover"  
+ 							   action="#{controleUsuario.excluirComprador()}"> 
+ 					<f:setPropertyActionListener value="#{comprador}" 
+ 												 target="#{controleUsuario.usuarioSelecionado}" /> 
+ 				</h:commandLink> 
+ 				 
+ 			</h:column> 
 
+			</h:dataTable>
+		</h:form>
 	</ui:define>
 </ui:composition>
