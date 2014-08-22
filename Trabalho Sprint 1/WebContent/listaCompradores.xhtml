@@ -27,11 +27,28 @@
 				<h:column>
 					<f:facet name="header">#{msg['nome']}</f:facet>
 					<h:outputText value="#{comprador.nome}" />
-				</h:column>					
+				</h:column>		
+				
+				<h:column>
+					<f:facet name="header">#{msg['data.nascimento']}</f:facet>
+					<h:outputText value="#{comprador.dataNascimento}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>				
+				</h:column>
+			
+				<h:column>
+					<f:facet name="header">Email</f:facet>
+					<h:outputText value="#{comprador.email}" />
+				</h:column>			
 				
 				<h:column>
 					<f:facet name="header">#{msg['login']}</f:facet>
 					<h:outputText value="#{comprador.login}" />
+				</h:column>			
+				
+				<h:column>
+					<f:facet name="header">#{msg['senha']}</f:facet>
+					<h:outputText value="#{comprador.senha}" />
 				</h:column>			
 				
 				<h:column headerText="#{msg['listaCompradores.acoes']}"> 
