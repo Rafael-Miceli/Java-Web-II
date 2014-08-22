@@ -23,6 +23,7 @@ import dao.UsuarioDao;
 @Setter
 @Named
 @RequestScoped
+@Interceptors(AutorizacaoAdministradorInterceptador.class)
 public class ControleUsuario implements Serializable {	
 	
 	private Usuario usuario;
@@ -50,7 +51,6 @@ public class ControleUsuario implements Serializable {
 	}
 	
 	//Adiciona Comprador
-	@Interceptors(AutorizacaoAdministradorInterceptador.class)
 	public String adicionarComprador() throws Exception {
 		usuarioSelecionado = new Usuario();
 		
@@ -58,7 +58,6 @@ public class ControleUsuario implements Serializable {
 	}
 	
 	// Exclui comprador
-	@Interceptors(AutorizacaoAdministradorInterceptador.class)
 	public String excluirComprador() throws Exception {
 		usuarioDao.excluirComprador(usuarioSelecionado);
 		listarCompradores();
@@ -66,14 +65,13 @@ public class ControleUsuario implements Serializable {
 	}
 
 	// Lista os compradores
-	@Interceptors(AutorizacaoAdministradorInterceptador.class)
 	public List<Usuario> listarCompradores() throws Exception {
 		
 		listaCompradores = usuarioDao.listarCompradores();		
 		return listaCompradores;
 	}
 	
-	@Interceptors(AutorizacaoAdministradorInterceptador.class)
+	
 	public void setListarCompradores(List<Usuario> listarCompradores){
 		this.listaCompradores = listarCompradores; 
 	}
@@ -87,7 +85,6 @@ public class ControleUsuario implements Serializable {
 	}
 
 	// Editar Comprador
-	@Interceptors(AutorizacaoAdministradorInterceptador.class)
 	public String editarComprador() {
 		return "adicionaComprador";
 	}
