@@ -5,6 +5,14 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<ui:define name="conteudo">
+	
+		<br />
+	
+		<h:form>
+ 		 	<h:commandLink value="#{msg['sair']}" action="#{controleLogin.sairSistema()}" />
+ 		 	<br />
+ 		 	<h:commandLink value="#{msg['mensagem.paginaConstrucao']}" action="paginaConstrucao" />
+ 		 </h:form>
 			
 		<h2>#{msg['listaCompradores.listaDecompradores']}</h2>	
 		<h:form>
