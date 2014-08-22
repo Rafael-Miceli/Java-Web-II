@@ -9,8 +9,8 @@ import javax.interceptor.InvocationContext;
 
 import modelo.Usuario;
 
-//Somente usu·rio com perfil admin ou comprador passa por ele.
-//Usu·rios anÙnimos n„o podem acessar as p·ginas interceptadas.
+//Somente usu√°rio com perfil admin ou comprador passa por ele.
+//Usu√°rios an√¥nimos n√£o podem acessar as p√°ginas interceptadas.
 public class AutorizacaoInterceptador implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -24,9 +24,10 @@ public class AutorizacaoInterceptador implements Serializable {
 		FacesContext context = FacesContext.getCurrentInstance();
 		usuario = (Usuario)context.getExternalContext().getSessionMap().get("user");
 		
-		if (usuario != null && usuario.getPapel().equals("comprador"))
+		if (usuario != null && (usuario.getPapel().equals("comprador") || 
+				usuario.getPapel().equals("admin")))
 			return contexto.proceed();
 		
-		throw new RuntimeException("Permiss„o negada");
+		throw new RuntimeException("Permiss√£o negada");
 	}
 }
