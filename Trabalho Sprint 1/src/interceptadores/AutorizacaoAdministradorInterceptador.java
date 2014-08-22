@@ -16,6 +16,10 @@ public class AutorizacaoAdministradorInterceptador implements Serializable{
 	
 	@Inject
 	Usuario usuario;
+	
+	@Inject
+	@MessageBundleImpl
+	private ResourceBundle messages;
 
 	@AroundInvoke
 	public Object interceptar(InvocationContext contexto) throws Exception {
@@ -26,6 +30,6 @@ public class AutorizacaoAdministradorInterceptador implements Serializable{
 		if(usuario != null && usuario.getPapel().equals("admin"))	
 			return contexto.proceed();
 		
-		throw new RuntimeException("Permissão negada");
+		throw new RuntimeException(messages.getString("permissao.negada"));
 	}
 }
