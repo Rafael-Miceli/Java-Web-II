@@ -6,32 +6,31 @@
 
 	<ui:define name="conteudo">
 					
-		<h1>Adiciona Comprador</h1>
+		<h1>#{msg['adicionarComprador.adicionaComprador']}</h1>
 		
-		<h2>#{msg['formulario.login']}</h2>
 		<h:form>
 			<table border="1">				
 				
 				<tr>
-					<td>Nome</td>
+					<td>#{msg['nome']}</td>
 					<td><h:inputText value="#{controleUsuario.usuarioSelecionado.nome}"
 							required="true"
-							requiredMessage="nome obrigatorio" /></td>
+							requiredMessage="#{msg['nome.obrigatorio']}" /></td>
 				</tr>				
 				<tr>
-					<td>Login</td>
+					<td>#{msg['login']}</td>
 					<td><h:inputText value="#{controleUsuario.usuarioSelecionado.login}"
 							required="true" 
-							requiredMessage="login obrigatorio"/></td>
+							requiredMessage="#{msg['login.obrigatorio']}"/></td>
 				</tr>			
 				<tr>
-					<td>Senha</td>
+					<td>#{msg['senha']}</td>
 					<td><h:inputText value="#{controleUsuario.usuarioSelecionado.senha}"
 							required="true" 
-							requiredMessage="senha obrigatorio"/></td>
+							requiredMessage="#{msg['senha.obrigatorio']}"/></td>
 				</tr>
 				<tr>
-					<td><h:commandButton value="Salvar"
+					<td><h:commandButton value="#{msg['adicionarComprador.salvar']}"
 							action="#{controleUsuario.salvar()}" /></td>
 				</tr>
 
