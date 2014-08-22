@@ -2,43 +2,77 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="conteudo">
 					
 		<h1>#{msg['adicionarComprador.adicionaComprador']}</h1>
-		
-		<h:form>
-			<table border="1">				
+
+			<h:form>
+
+				<p:panelGrid columns="2">
+
+
+					<h:outputLabel value="#{msg['nome']} : " for="campo-nome" />
+					<p:inputText value="#{controleUsuario.usuarioSelecionado.nome}"
+						id="campo-nome" required="true"
+						requiredMessage="#{msg['nome.obrigatorio']}" 
+					/>
+						
+					
+
+					<h:outputLabel value="#{msg['data.nascimento']} : "
+						for="campo-data" />
+					<p:calendar id="campo-data"
+						value="#{controleUsuario.usuarioSelecionado.dataNascimento}"
+						pattern="dd-MM-yyyy" mask="true" 
+					/>
+					
+
+					<h:outputLabel value="Email : " for="campo-email" />
+					<p:inputText value="#{controleUsuario.usuarioSelecionado.email}"
+								 id="campo-email" 
+								 required="true"
+								 requiredMessage="#{msg['email.obrigatorio']}"
+								 validatorMessage="#{msg['email.incorreto']}">
+
+						<f:validateRegex
+							pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+
+					</p:inputText>
+					
+					
+
+					<h:outputLabel value="#{msg['login']} : " for="campo-login" />
+					<p:inputText value="#{controleUsuario.usuarioSelecionado.login}"
+							     id="campo-login" 
+							     required="true"
+					 	         requiredMessage="#{msg['login.obrigatorio']}" 
+				     />
+					 	         
+		 	        
+
+					<h:outputLabel value="#{msg['senha']} : " for="campo-senha" />
+					<p:inputText value="#{controleUsuario.usuarioSelecionado.senha}"
+							     id="campo-senha" 
+							     required="true"
+					 	         requiredMessage="#{msg['senha.obrigatorio']}" 
+		 	        />
+					
+
+					
+					
+					<p:commandButton
+							value="#{msg['adicionarComprador.salvar']}"
+							action="#{controleUsuario.salvar()}" 
+					/>
+					
+				</p:panelGrid>
 				
-				<tr>
-					<td>#{msg['nome']}</td>
-					<td><h:inputText value="#{controleUsuario.usuarioSelecionado.nome}"
-							required="true"
-							requiredMessage="#{msg['nome.obrigatorio']}" /></td>
-				</tr>				
-				<tr>
-					<td>#{msg['login']}</td>
-					<td><h:inputText value="#{controleUsuario.usuarioSelecionado.login}"
-							required="true" 
-							requiredMessage="#{msg['login.obrigatorio']}"/></td>
-				</tr>			
-				<tr>
-					<td>#{msg['senha']}</td>
-					<td><h:inputText value="#{controleUsuario.usuarioSelecionado.senha}"
-							required="true" 
-							requiredMessage="#{msg['senha.obrigatorio']}"/></td>
-				</tr>
-				<tr>
-					<td><h:commandButton value="#{msg['adicionarComprador.salvar']}"
-							action="#{controleUsuario.salvar()}" /></td>
-				</tr>
+			</h:form>
 
-			</table>
-
-		</h:form>
-
-		<h:messages />
+			 <p:messages autoUpdate="true"/>
 
 	</ui:define>
 </ui:composition>
