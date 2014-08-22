@@ -64,7 +64,7 @@ public class UsuarioDao {
 		
 		for (Usuario comprador : usuarios) {
 			if(comprador.getLogin().equals(compradorNovo.getLogin()))
-				throw new Exception();
+				throw new RuntimeException(messages.getString("login.de.outro.usuario"));
 		}
 		
 		this.usuarios.add(compradorNovo);		
