@@ -1,5 +1,7 @@
 package modelo;
 
+import java.io.Serializable;
+
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.validation.constraints.Size;
@@ -17,7 +19,7 @@ import lombok.Setter;
 @Setter
 @Named
 @SessionScoped
-public class Produto {
+public class Produto implements Serializable {
 
 	@NonNull
 	@Size(min = 3, max = 50,  message = "Codigo dever ter 5 caracteres")
