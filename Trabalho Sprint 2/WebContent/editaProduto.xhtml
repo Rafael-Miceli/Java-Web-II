@@ -1,0 +1,46 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+
+		<h1>Edita Produto</h1>
+
+			<h:form id="adicionaComprador">
+
+				<p:panelGrid columns="2">
+
+
+					<p:outputLabel value="Codigo : " for="campo-codigo" />
+					<h:inputHidden value="#{controleProduto.produtoSelecionado.codigo}"
+						id="campo-codigo" required="true"
+						requiredMessage="Codigo Obrigatorio" 
+					/>
+
+					<p:outputLabel value="#{msg['nome']} : " for="campo-nome" />
+					<p:inputText value="#{controleProduto.produtoSelecionado.nome}"
+						id="campo-nome" required="true"
+						requiredMessage="#{msg['nome.obrigatorio']}" 
+					/>					
+		 	        
+							
+				</p:panelGrid>		
+					
+				<br />	
+					
+				<p:commandButton
+						value="Salvar Produto"
+						action="#{controleUsuario.salvarAlteracoesDoProduto()}" 
+				/>
+					
+						
+			</h:form>
+
+			 <p:messages autoUpdate="true"/>
+						
+			
+	</ui:define>
+</ui:composition>

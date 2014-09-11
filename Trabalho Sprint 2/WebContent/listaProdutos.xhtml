@@ -1,0 +1,56 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+	
+		<br />
+	
+		<h:form>
+ 		 	<p:commandLink value="#{msg['sair']}" action="#{controleLogin.sairSistema()}" />
+ 		 	<br />
+ 		 </h:form>
+			
+		<h2>Lista de Usuarios</h2>	
+		
+		<br />
+		
+		<h:form>
+			
+			<p:commandButton value="Adicionar Usuario" action="#{controleProduto.adicionarProduto()}" />
+						
+			<p:dataTable value="#{controleProduto.listaProdutos}" var="produto"
+				rendered="#{not empty controleProduto.listaProdutos}"  >
+				
+				<p:column headerText="Codigo">
+					<h:outputText value="#{produto.codigo}" />
+				</p:column>	
+				
+				<p:column headerText="#{msg['nome']}">
+					<h:outputText value="#{produto.nome}" />
+				</p:column>		
+			
+				<p:column headerText=""> 
+ 					   
+	 				<h:commandLink value="Editar" action="#{controleProduto.editarProduto()}"> 
+	 					<f:setPropertyActionListener value="#{produto}" 
+	 												 target="#{controleProduto.produtoSelecionado}" /> 
+	 				</h:commandLink> 				 
+	 				 
+	 				<h:outputLabel value=" "/> 
+	 				 
+	 				<h:commandLink value="Excluir"  
+	 							   action="#{controleUsuario.excluirProduto()}"> 
+	 					<f:setPropertyActionListener value="#{produto}" 
+	 												 target="#{controleUsuario.produtoSelecionado}" /> 
+	 				</h:commandLink> 
+ 				 
+ 				</p:column> 
+
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

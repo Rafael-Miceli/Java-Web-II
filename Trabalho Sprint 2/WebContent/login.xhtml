@@ -1,0 +1,47 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+
+		<h2>#{msg['formulario.login']}</h2>
+	
+			
+			<h:form>
+			
+				<p:panelGrid columns="2">
+			
+					<p:outputLabel value="#{msg['login']} : " for="campo-login" />
+					<p:inputText value="#{controleLogin.usuario.login}"
+							     id="campo-login" 
+							     required="true"
+					 	         requiredMessage="#{msg['login.obrigatorio']}"
+				     />
+							 	         				 	        
+		
+					<p:outputLabel value="#{msg['senha']} : " for="campo-senha" />
+					<p:password value="#{controleLogin.usuario.senha}"
+							     id="campo-senha" 
+							     required="true"
+					 	         requiredMessage="#{msg['senha.obrigatorio']}" 
+		 	        />
+		 	        	 	        
+			
+				</p:panelGrid>
+					
+				<p:commandButton
+						value="#{msg['logar']}"
+						action="#{controleLogin.realizarLogin()}"
+				/>
+				
+			</h:form>
+			
+			 <p:messages autoUpdate="true"/>
+				
+
+	</ui:define>
+</ui:composition>
+
