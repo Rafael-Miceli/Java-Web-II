@@ -14,13 +14,13 @@
  		 	<br />
  		 </h:form>
 			
-		<h2>Lista de Usuarios</h2>	
+		<h2>Lista de Produtos</h2>	
 		
 		<br />
 		
 		<h:form>
 			
-			<p:commandButton value="Adicionar Usuario" action="#{controleProduto.adicionarProduto()}" />
+			<p:commandButton value="Adicionar Produto" action="#{controleProduto.adicionarProduto()}" />
 						
 			<p:dataTable value="#{controleProduto.listaProdutos}" var="produto"
 				rendered="#{not empty controleProduto.listaProdutos}"  >
@@ -43,9 +43,9 @@
 	 				<h:outputLabel value=" "/> 
 	 				 
 	 				<h:commandLink value="Excluir"  
-	 							   action="#{controleUsuario.excluirProduto()}"> 
+	 							   action="#{controleProduto.excluirProduto()}"> 
 	 					<f:setPropertyActionListener value="#{produto}" 
-	 												 target="#{controleUsuario.produtoSelecionado}" /> 
+	 												 target="#{controleProduto.produtoSelecionado}" /> 
 	 				</h:commandLink> 
  				 
  				</p:column> 

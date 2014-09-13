@@ -95,11 +95,7 @@ public class ControleUsuario implements Serializable {
 		            FacesContext context = FacesContext.getCurrentInstance();
 		            context.addMessage(this.campoLogin.getClientId(context), message);
 					
-		            /*FacesContext context = FacesContext.getCurrentInstance();  
-			          
-			        context.addMessage(null, new FacesMessage("Successful", "Hello "));  
-			        context.addMessage(null, new FacesMessage("Second Message", "Additional Info Here..."));  
-			        throw new RuntimeException(messages.getString("login.de.outro.usuario"));*/
+		            return this.adicionarUsuario();
 				}
 				
 			}
@@ -108,7 +104,6 @@ public class ControleUsuario implements Serializable {
 		}
 		
 		usuarioDao.adicionarUsuario(usuarioSelecionado);
-		listarUsuarios();
 		
 		return "listaUsuarios";
 	}

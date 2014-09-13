@@ -22,9 +22,6 @@ import lombok.Setter;
 @SessionScoped
 public class Usuario implements Serializable {
 	
-	/**
-	 * UID de serialização estática.
-	 */
 	private static final long serialVersionUID = 6185173587860633317L;
 
 

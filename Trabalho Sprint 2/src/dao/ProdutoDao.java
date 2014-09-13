@@ -26,7 +26,11 @@ public class ProdutoDao {
 	
 	//Adiciona Produto
 	public void adicionarProduto(Produto produtoNovo) throws Exception{
+		Produto produtoTeste = new Produto();
+		produtoTeste.setCodigo("12345");
+		produtoTeste.setNome("abcde");
 		
+		this.produtos.add(produtoTeste);
 		this.produtos.add(produtoNovo);		
 		
 	}
@@ -49,9 +53,10 @@ public class ProdutoDao {
 			if(produtoEditado.getCodigo().equals(produto.getCodigo())){
 				
 				produtoEditado.setNome(produto.getNome());
-				produtoEditado.setCategoria(produto.getCategoria());	
+				//produtoEditado.setCategoria(produto.getCategoria());	
 				
 			}
+			
 			
 		}				
 	}

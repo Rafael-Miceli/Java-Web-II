@@ -8,27 +8,13 @@ import modelo.Usuario;
 
 public class UsuarioDao {
 
-	static List<Usuario> usuarios;	
+	private List<Usuario> usuarios;	
 	
 	private static UsuarioDao usuarioDaoInstance;
 	
 	
 	private UsuarioDao()
 	{
-		CriarAdmin();
-	}
-	
-	public static UsuarioDao Create()
-	{
-		if(usuarioDaoInstance == null)
-		{			
-			usuarioDaoInstance = new UsuarioDao();
-		}
-		
-		return usuarioDaoInstance;
-	}
-	
-	private static void CriarAdmin() {
 		usuarios = new ArrayList<Usuario>();
 		
 		Usuario admin = new Usuario();
@@ -40,7 +26,16 @@ public class UsuarioDao {
 		admin.setPapel("admin");
 					
 		usuarios.add(admin);
-
+	}
+	
+	public static UsuarioDao Create()
+	{
+		if(usuarioDaoInstance == null)
+		{			
+			usuarioDaoInstance = new UsuarioDao();
+		}
+		
+		return usuarioDaoInstance;
 	}
 	
 	public Usuario buscarUsuarioPorLogin(String login) {
