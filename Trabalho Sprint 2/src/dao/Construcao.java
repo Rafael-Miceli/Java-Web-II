@@ -2,7 +2,7 @@ package dao;
 
 import java.io.Serializable;
 
-import interceptadores.AutorizacaoInterceptador;
+import interceptadores.AdministradorCompradorInterceptador;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 @Named
 @RequestScoped
-@Interceptors(AutorizacaoInterceptador.class)
+@Interceptors(AdministradorCompradorInterceptador.class)
 public class Construcao implements Serializable {
 	
 	/**

@@ -1,7 +1,8 @@
 package controle;
 
 import i18n.MessageBundleImpl;
-import interceptadores.AutorizacaoAdministradorInterceptador;
+import interceptadores.AdministradorFornecedorInterceptador;
+import interceptadores.AdministradorInterceptador;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -32,7 +33,6 @@ import dao.UsuarioDao;
 @Setter
 @Named
 @RequestScoped
-@Interceptors(AutorizacaoAdministradorInterceptador.class)
 public class ControleProduto implements Serializable {	
 
 	private static final long serialVersionUID = 1L;
@@ -60,6 +60,7 @@ public class ControleProduto implements Serializable {
 	/*****           *****/
 	
 	//Adiciona Comprador
+	@Interceptors(AdministradorInterceptador.class)
 	public String adicionarProduto() throws Exception {		
 		produtoSelecionado = new Produto();	
 		
@@ -67,11 +68,14 @@ public class ControleProduto implements Serializable {
 	}
 	
 	//Salva Novo Produto
+	@Interceptors(AdministradorInterceptador.class)
 	public String salvarNovoProduto() throws Exception {
 				
-		//for (Produto produto : listaProdutos) {
-			//if(produtoSelecionado.getCodigo().equals(produto.getCodigo())){
-								
+		for (Produto produto : listaProdutos) {
+			if(produtoSelecionado.getCodigo().equals(produto.getCodigo())){
+							
+				 throw new RuntimeException(messages.getString("login.de.outro.usuario"));
+				
 				//FacesMessage message = new FacesMessage("Login já existe");
 	            //FacesContext context = FacesContext.getCurrentInstance();
 	            //context.addMessage(this.campoLogin.getClientId(context), message);
@@ -79,11 +83,9 @@ public class ControleProduto implements Serializable {
 	            /*FacesContext context = FacesContext.getCurrentInstance();  
 		          
 		        context.addMessage(null, new FacesMessage("Successful", "Hello "));  
-		        context.addMessage(null, new FacesMessage("Second Message", "Additional Info Here..."));*/ 
-				
-		       // throw new RuntimeException(messages.getString("login.de.outro.usuario"));
-			//}
-		//}
+		        context.addMessage(null, new FacesMessage("Second Message", "Additional Info Here..."));*/ 					       
+			}
+		}
 		
 		produtoDao.adicionarProduto(produtoSelecionado);
 		listarProdutos();
@@ -93,11 +95,13 @@ public class ControleProduto implements Serializable {
 		
 		
 	// Edita Produto
+	@Interceptors(AdministradorInterceptador.class)
 	public String editarProduto() {		
 		return "editaProduto";
 	}
 	
 	//Salva alterações do Produto
+	@Interceptors(AdministradorInterceptador.class)
 	public String salvarAlteracoesDoProduto() throws Exception {
 				
 		produtoDao.editarProduto(produtoSelecionado);
@@ -108,6 +112,7 @@ public class ControleProduto implements Serializable {
 
 	
 	// Exclui Produto
+	@Interceptors(AdministradorInterceptador.class)
 	public String excluirProduto() throws Exception {
 		produtoDao.excluirProduto(produtoSelecionado);
 		listarProdutos();
@@ -122,23 +127,26 @@ public class ControleProduto implements Serializable {
 		
 	
 	// Lista os Produtos
+	@Interceptors(AdministradorFornecedorInterceptador.class)
 	public List<Produto> listarProdutos() throws Exception {
 		
 		listaProdutos = produtoDao.listarProdutos();		
 		return listaProdutos;
 	}
 	
-	
+	@Interceptors(AdministradorFornecedorInterceptador.class)
 	public void setListarProdutos(List<Produto> listarProdutos){
 		this.listaProdutos = listarProdutos; 
 	}
 	
 	
 	// Produto selecionado
+	@Interceptors(AdministradorFornecedorInterceptador.class)
 	public Produto getUsuarioSelecionado(){
 		return produtoSelecionado;
 	}
 	
+	@Interceptors(AdministradorFornecedorInterceptador.class)
 	public void setUsuarioSelecionado(Produto produtoSelecionado){
 		this.produtoSelecionado = produtoSelecionado;
 	}

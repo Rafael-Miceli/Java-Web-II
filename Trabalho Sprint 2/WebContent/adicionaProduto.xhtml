@@ -7,14 +7,14 @@
 
 	<ui:define name="conteudo">
 
-		<h1>Adiciona Produto</h1>
+		<h1>#{msg['adicionaProduto.adicionarProduto']}</h1>
 
 			<h:form id="adicionaComprador">
 
 				<p:panelGrid columns="2">
 
 
-					<p:outputLabel value="Codigo : " for="campo-codigo" />
+					<p:outputLabel value="#{msg['codigo']} : " for="campo-codigo" />
 					<p:inputText value="#{controleProduto.produtoSelecionado.codigo}"
 						id="campo-codigo" required="true"
 						requiredMessage="Codigo Obrigatorio" 
@@ -32,7 +32,7 @@
 				<br />	
 					
 				<p:commandButton
-						value="Salvar Produto"
+						value="#{msg['salvar']}"
 						action="#{controleProduto.salvarNovoProduto()}" 
 				/>
 					

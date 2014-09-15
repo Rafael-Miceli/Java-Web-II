@@ -7,7 +7,7 @@
 
 	<ui:define name="conteudo">
 
-		<h1>Editar Usuario</h1>
+		<h1>#{msg['editaUsuario.EditarUsuario']}</h1>
 
 			<h:form>
 
@@ -51,23 +51,30 @@
 					 	         requiredMessage="#{msg['login.obrigatorio']}" 
 					 	         				 	        
 				     />
-					 	         
-		 	        
-
+				    				 	         
+		 	       
 					<p:outputLabel value="#{msg['senha']} : " for="campo-senha" />
 					<p:password value="#{controleUsuario.usuarioSelecionado.senha}"
 							     id="campo-senha" 
 							     required="true"
 					 	         requiredMessage="#{msg['senha.obrigatorio']}" 
 		 	        />
+		 	        
+		 	        <p:outputLabel value="Papel : " for="campo-papel"  />
+					<h:inputHidden value="#{controleUsuario.usuarioSelecionado.papel}"
+							     id="campo-papel" 
+							     required="true"
+					 	         requiredMessage="Papel Obrigatório" 
+					 	         				 	        
+				     />
 							
 				</p:panelGrid>		
 					
 				<br />	
 					
 				<p:commandButton
-						value="#{msg['editarComprador.salvar']}"
-						action="#{controleUsuario.salvarAlteracoesDoComprador()}" 
+						value="#{msg['salvar']}"
+						action="#{controleUsuario.salvarAlteracoesDoUsuario()}" 
 				/>
 					
 				

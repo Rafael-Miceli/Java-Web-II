@@ -14,7 +14,7 @@ import modelo.Usuario;
 
 //Somente usuário com perfil admin ou comprador passa por ele.
 //Usuários anônimos não podem acessar as páginas interceptadas.
-public class AutorizacaoInterceptador implements Serializable {
+public class AdministradorCompradorInterceptador implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -32,7 +32,7 @@ public class AutorizacaoInterceptador implements Serializable {
 		usuario = (Usuario)context.getExternalContext().getSessionMap().get("user");
 		
 		if (usuario != null && (usuario.getPapel().equals("comprador") || 
-				usuario.getPapel().equals("admin")))
+				usuario.getPapel().equals("admin"))) 
 			return contexto.proceed();
 		
 		throw new RuntimeException(messages.getString("permissao.negada"));

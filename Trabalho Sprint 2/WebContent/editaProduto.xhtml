@@ -7,14 +7,14 @@
 
 	<ui:define name="conteudo">
 
-		<h1>Edita Produto</h1>
+		<h1>#{msg['editaProduto.EditarProduto']}</h1>
 
 			<h:form id="adicionaComprador">
 
 				<p:panelGrid columns="2">
 
 
-					<p:outputLabel value="Codigo : " for="campo-codigo" />
+					<p:outputLabel value="#{msg['codigo']} : " for="campo-codigo" />
 					<h:inputHidden value="#{controleProduto.produtoSelecionado.codigo}"
 						id="campo-codigo" required="true"
 						requiredMessage="Codigo Obrigatorio" 
@@ -32,8 +32,8 @@
 				<br />	
 					
 				<p:commandButton
-						value="Salvar Produto"
-						action="#{controleUsuario.salvarAlteracoesDoProduto()}" 
+						value="#{msg['salvar']}"
+						action="#{controleProduto.salvarAlteracoesDoProduto()}" 
 				/>
 					
 						

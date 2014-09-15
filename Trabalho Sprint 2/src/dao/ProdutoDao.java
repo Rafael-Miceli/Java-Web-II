@@ -13,6 +13,10 @@ public class ProdutoDao {
 	
 	private static ProdutoDao produtoDaoInstance;
 	
+	private ProdutoDao() {
+		produtos = new ArrayList<>();
+	}
+	
 	public static ProdutoDao Create()
 	{
 		if(produtoDaoInstance == null)
@@ -21,18 +25,14 @@ public class ProdutoDao {
 		}
 		
 		return produtoDaoInstance;
-	}
+	 }
 	
 	
 	//Adiciona Produto
 	public void adicionarProduto(Produto produtoNovo) throws Exception{
-		Produto produtoTeste = new Produto();
-		produtoTeste.setCodigo("12345");
-		produtoTeste.setNome("abcde");
-		
-		this.produtos.add(produtoTeste);
+				
 		this.produtos.add(produtoNovo);		
-		
+
 	}
 	
 	
@@ -55,9 +55,7 @@ public class ProdutoDao {
 				produtoEditado.setNome(produto.getNome());
 				//produtoEditado.setCategoria(produto.getCategoria());	
 				
-			}
-			
-			
+			}			
 		}				
 	}
 	
@@ -65,6 +63,7 @@ public class ProdutoDao {
 	public List<Produto> listarProdutos() throws Exception{
 		
 		return this.produtos;
+		
 	}
 		
 }

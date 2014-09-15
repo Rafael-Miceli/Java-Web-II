@@ -3,6 +3,7 @@ package controle;
 import i18n.MessageBundleImpl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -27,23 +28,35 @@ public class ControleLogin implements Serializable {
 	
 	private UsuarioDao usuarioDao;
 	
+	private List<String> papeis;
+	
 	@Inject
 	private Usuario usuario;
 
 	@Inject
 	@MessageBundleImpl
 	private ResourceBundle messages;
+	
+	public ControleLogin() {
+		
+		papeis = new ArrayList<>();
+		papeis.add("comprador");
+		papeis.add("fornecedor");
+		papeis.add("admin");
+		
+	}
 
 	
-	//Método que realiza o login
+	//Metodo que realiza o login
 	public String realizarLogin()
 	{			
 		usuarioDao = UsuarioDao.Create();
 		
 		String login = usuario.getLogin();
 		String senha = usuario.getSenha();
+		String papel = usuario.getPapel();
 		
-		Usuario usuario = usuarioDao.buscarUsuarioPorLogin(login);				
+		Usuario usuario = usuarioDao.buscarUsuarioPorLoginNumPapel(login, papel);				
 		
 		//Verifica se usuário existe, e se existir, verifica se sua senha está correta
 		if (usuario != null && usuario.getSenha().equals(senha))
@@ -51,16 +64,24 @@ public class ControleLogin implements Serializable {
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.getExternalContext().getSessionMap().put("user", usuario);
 			
-			//Verifica se usuário é administrador
-			if (usuario.getPapel().equals("admin"))				
+			//usario administrador
+			if (usuario.getPapel().equals("admin")){
 				return "listaUsuarios";
-			else
-				return "paginaConstrucao";			
-					
+			}	
+			//usuario comprador
+			else if (usuario.getPapel().equals("comprador")){
+				return "paginaConstrucao";		
+			}	
+			//usario fornecedor
+			else{
+				return "listaProdutos";	
+			}
+				
 		}
-		else
-			return "falha";			
-		
+		else{
+			return "falha";		
+		}
+					
 	}
 	
 	public String sairSistema(){

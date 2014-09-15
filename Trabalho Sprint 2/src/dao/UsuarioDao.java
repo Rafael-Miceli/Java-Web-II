@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import modelo.Usuario;
@@ -8,24 +9,14 @@ import modelo.Usuario;
 
 public class UsuarioDao {
 
-	private List<Usuario> usuarios;	
+	static List<Usuario> usuarios;	
 	
 	private static UsuarioDao usuarioDaoInstance;
 	
 	
 	private UsuarioDao()
 	{
-		usuarios = new ArrayList<Usuario>();
-		
-		Usuario admin = new Usuario();
-		admin.setNome("Ricardo");
-		admin.setDataNascimento(null);
-		admin.setEmail("ricardo@email.com");
-		admin.setLogin("admin");
-		admin.setSenha("admin");
-		admin.setPapel("admin");
-					
-		usuarios.add(admin);
+		CriarAdmin();
 	}
 	
 	public static UsuarioDao Create()
@@ -38,10 +29,37 @@ public class UsuarioDao {
 		return usuarioDaoInstance;
 	}
 	
+	private static void CriarAdmin() {
+		usuarios = new ArrayList<Usuario>();
+		
+		Usuario admin = new Usuario();
+		admin.setNome("Ricardo");
+		admin.setDataNascimento(null);
+		admin.setEmail("ricardo@email.com");
+		admin.setLogin("admin");
+		admin.setSenha("admin");
+		admin.setPapel("admin");
+					
+		usuarios.add(admin);
+
+	}
+	
 	public Usuario buscarUsuarioPorLogin(String login) {
 		for (Usuario usuario : usuarios) {
 			if(usuario.getLogin().equals(login))
 				return usuario;
+		}
+		
+		return null;
+	}	
+	
+	public Usuario buscarUsuarioPorLoginNumPapel(String login, String papel) {
+		for (Usuario usuario : usuarios) {
+			if(usuario.getPapel().equals(papel)){
+				if(usuario.getLogin().equals(login)){
+					return usuario;
+				}				
+			}			
 		}
 		
 		return null;
@@ -61,11 +79,47 @@ public class UsuarioDao {
 		
 	}
 	
-	//Exclui Comprador
+	//Lista os Usuarios
+	public List<Usuario> listarUsuariosSemPapelAdmin() throws Exception{
+		
+		List<Usuario> usuariosSemPapelAdmin = new ArrayList<>();
+		
+		for (Usuario usuario : usuarios){
+			if(!(usuario.getPapel().equals("admin"))){
+				usuariosSemPapelAdmin.add(usuario);
+			}				
+		}
+					
+		return usuariosSemPapelAdmin;
+		
+	}
+	
+	//Exclui Usuario
 	public void excluirUsuario(Usuario usuario) throws Exception{
 		
 		this.usuarios.remove(usuario);		
 		
+	}
+	
+	//Edita Usuario
+	public void editarUsuario(Usuario usuario){
+		
+		//Usuario compradorEditado = this.buscarUsuarioPorLogin(comprador.getLogin());
+		
+		for(Usuario usuarioEditado : this.usuarios){
+			
+			if(usuarioEditado.getPapel().equals(usuario.getPapel())){
+				
+				if(usuarioEditado.getLogin().equals(usuario.getLogin())){
+					
+					usuarioEditado.setNome(usuario.getNome());
+					usuarioEditado.setDataNascimento(usuario.getDataNascimento());
+					usuarioEditado.setEmail(usuario.getEmail());
+					usuarioEditado.setSenha(usuario.getSenha());	
+					
+				}
+			}			
+		}				
 	}
 		
 		

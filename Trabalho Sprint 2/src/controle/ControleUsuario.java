@@ -1,7 +1,7 @@
 package controle;
 
 import i18n.MessageBundleImpl;
-import interceptadores.AutorizacaoAdministradorInterceptador;
+import interceptadores.AdministradorInterceptador;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ import dao.UsuarioDao;
 @Setter
 @Named
 @RequestScoped
-@Interceptors(AutorizacaoAdministradorInterceptador.class)
+@Interceptors(AdministradorInterceptador.class)
 public class ControleUsuario implements Serializable {	
 
 
@@ -58,6 +58,15 @@ public class ControleUsuario implements Serializable {
 		listarUsuarios();
 	}
 	
+	//Usuário selecionado
+	public Usuario getUsuarioSelecionado(){
+		return usuarioSelecionado;
+	}
+	
+	public void setUsuarioSelecionado(Usuario usuarioSelecionado){
+		this.usuarioSelecionado = usuarioSelecionado;
+	}
+	
 	/*****           *****/
 	/***** Usuários *****/
 	/*****           *****/
@@ -65,7 +74,7 @@ public class ControleUsuario implements Serializable {
 	//Lista de Usuários
 	public List<Usuario> listarUsuarios() throws Exception {
 		
-		listaUsuarios = usuarioDao.listarUsuarios();		
+		listaUsuarios = usuarioDao.listarUsuariosSemPapelAdmin();		
 		return listaUsuarios;
 		
 	}
@@ -75,14 +84,14 @@ public class ControleUsuario implements Serializable {
 		this.listaUsuarios = listarUsuarios; 
 	}
 	
-	//Adiciona Comprador
+	//Adiciona Usuario
 	public String adicionarUsuario() throws Exception {		
 		usuarioSelecionado = new Usuario();	
 		
 		return "adicionaUsuario";
 	}
 	
-	//Salva Novo comprador
+	//Salva Novo Usuario
 	public String salvarNovoUsuario() throws Exception {
 				
 		for (Usuario usuario : listaUsuarios) {
@@ -95,15 +104,21 @@ public class ControleUsuario implements Serializable {
 		            FacesContext context = FacesContext.getCurrentInstance();
 		            context.addMessage(this.campoLogin.getClientId(context), message);
 					
-		            return this.adicionarUsuario();
-				}
-				
-			}
-			
-			
+		            /*FacesContext context = FacesContext.getCurrentInstance();  
+			          
+			        context.addMessage(null, new FacesMessage("Successful", "Hello "));  
+			        context.addMessage(null, new FacesMessage("Second Message", "Additional Info Here..."));  
+			        throw new RuntimeException(messages.getString("login.de.outro.usuario"));*/
+				}				
+			}			
+		}
+		
+		if(usuarioSelecionado.getPapel().equals("fornecedor")){
+			usuarioSelecionado.setDataCadastro(new Date());
 		}
 		
 		usuarioDao.adicionarUsuario(usuarioSelecionado);
+		listarUsuarios();
 		
 		return "listaUsuarios";
 	}
@@ -116,7 +131,11 @@ public class ControleUsuario implements Serializable {
 	//Salva alterações do usuario
 	public String salvarAlteracoesDoUsuario() throws Exception {
 				
-		usuarioDao.editarComprador(usuarioSelecionado);
+		if(usuarioSelecionado.getPapel().equals("fornecedor")){
+			usuarioSelecionado.setDataCadastro(new Date());
+		}
+		
+		usuarioDao.editarUsuario(usuarioSelecionado);
 		listarUsuarios();
 		
 		return "listaUsuarios";
@@ -293,14 +312,7 @@ public class ControleUsuario implements Serializable {
 	}*/
 	
 	
-	//Usuário selecionado
-	public Usuario getUsuarioSelecionado(){
-		return usuarioSelecionado;
-	}
 	
-	public void setUsuarioSelecionado(Usuario usuarioSelecionado){
-		this.usuarioSelecionado = usuarioSelecionado;
-	}
 	
 	//FacesContext.getCurrentInstance().addMessage("campoLogin", 
 	  //new FacesMessage(FacesMessage.SEVERITY_INFO,"Login já existe", "Login já existe"));  

@@ -7,7 +7,7 @@
 
 	<ui:define name="conteudo">
 
-		<h1>#{msg['adicionarComprador.adicionaComprador']}</h1>
+		<h1>#{msg['adicionaUsuario.adicionarUsuario']}</h1>
 
 			<h:form id="adicionaComprador">
 
@@ -62,7 +62,7 @@
 		 	        />
 		 	        
 		 	        
-		 	        <p:outputLabel value="Papel : " for="campo-papel" />
+		 	        <p:outputLabel value="#{msg['papel']} : " for="campo-papel" />
 		 	        <h:selectOneMenu value="#{controleUsuario.usuarioSelecionado.papel}" id="campo-papel">
 						<f:selectItem itemValue="comprador" />
 						<f:selectItem itemValue="fornecedor" />
@@ -73,7 +73,7 @@
 				<br />	
 					
 				<p:commandButton
-						value="#{msg['adicionarComprador.salvar']}"
+						value="#{msg['salvar']}"
 						action="#{controleUsuario.salvarNovoUsuario()}" 
 				/>
 					

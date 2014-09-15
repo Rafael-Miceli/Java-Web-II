@@ -28,6 +28,11 @@
 							     required="true"
 					 	         requiredMessage="#{msg['senha.obrigatorio']}" 
 		 	        />
+		 	        
+		 	        <p:outputLabel value="#{msg['papel']} : " for="campo-papel" />
+		 	        <p:selectOneMenu id="campo-papel" value="#{controleLogin.usuario.papel}">
+                         <f:selectItems value="#{controleLogin.papeis}"/>  
+       		 		</p:selectOneMenu>
 		 	        	 	        
 			
 				</p:panelGrid>

@@ -14,37 +14,37 @@
  		 	<br />
  		 </h:form>
 			
-		<h2>Lista de Produtos</h2>	
+		<h2>#{msg['listaProdutos.listaDeProdutos']}</h2>	
 		
 		<br />
 		
 		<h:form>
 			
-			<p:commandButton value="Adicionar Produto" action="#{controleProduto.adicionarProduto()}" />
+			<p:commandButton value="#{msg['adicionaProduto.adicionarProduto']}" action="#{controleProduto.adicionarProduto()}" />
 						
-			<p:dataTable value="#{controleProduto.listaProdutos}" var="produto"
+			<p:dataTable value="#{controleProduto.listaProdutos}" var="pro"
 				rendered="#{not empty controleProduto.listaProdutos}"  >
 				
-				<p:column headerText="Codigo">
-					<h:outputText value="#{produto.codigo}" />
+				<p:column headerText="#{msg['codigo']}">
+					<h:outputText value="#{pro.codigo}" />
 				</p:column>	
 				
 				<p:column headerText="#{msg['nome']}">
-					<h:outputText value="#{produto.nome}" />
+					<h:outputText value="#{pro.nome}" />
 				</p:column>		
 			
 				<p:column headerText=""> 
  					   
-	 				<h:commandLink value="Editar" action="#{controleProduto.editarProduto()}"> 
-	 					<f:setPropertyActionListener value="#{produto}" 
+	 				<h:commandLink value="#{msg['editar']}" action="#{controleProduto.editarProduto()}"> 
+	 					<f:setPropertyActionListener value="#{pro}" 
 	 												 target="#{controleProduto.produtoSelecionado}" /> 
 	 				</h:commandLink> 				 
 	 				 
 	 				<h:outputLabel value=" "/> 
 	 				 
-	 				<h:commandLink value="Excluir"  
+	 				<h:commandLink value="#{msg['excluir']}"  
 	 							   action="#{controleProduto.excluirProduto()}"> 
-	 					<f:setPropertyActionListener value="#{produto}" 
+	 					<f:setPropertyActionListener value="#{pro}" 
 	 												 target="#{controleProduto.produtoSelecionado}" /> 
 	 				</h:commandLink> 
  				 
