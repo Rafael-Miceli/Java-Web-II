@@ -1,18 +1,22 @@
 package modelo;
 
+import lombok.Getter;
+
+
+@Getter
+
 public enum Categoria {
 	
-	CELULAR(1), INFORMATICA(2), ELETRONICO(3), ELETRODOMESTICO(4), MOVEL(5), ESPORTE(6);
+	CELULAR("celular"), INFORMATICA("informatica"), ELETRONICO("eletronico"), ELETRODOMESTICO("eletrodomestico"), MOVEL("movel"), ESPORTE("esporte");
 	
-	private final int valor; 
-	
-	Categoria(int valorOpcao){ 
-		valor = valorOpcao; 
+	public String valores;
+
+	Categoria(String descricao){
+		this.valores = descricao;
 	}
+
 	
-	public int getValor(){ 
-		return valor; 
-	}
+	
 
 
 }

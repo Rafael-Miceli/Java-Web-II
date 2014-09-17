@@ -6,28 +6,21 @@ import interceptadores.AdministradorInterceptador;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.annotation.ManagedBean;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent; 
-import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.interceptor.Interceptors;
 
 import lombok.Getter;
 import lombok.Setter;
+import modelo.Categoria;
 import modelo.Produto;
 import modelo.Usuario;
 import dao.ProdutoDao;
-import dao.UsuarioDao;
 
 @Getter
 @Setter
@@ -43,22 +36,40 @@ public class ControleProduto implements Serializable {
 	private List<Produto> listaProdutos = null;
 		
 	private ProdutoDao produtoDao;
+
+	private Usuario fornecedor;
 	
 	
+	private List<String> categorias;
+	
+		
 	@Inject
 	@MessageBundleImpl
 	private ResourceBundle messages;
 	
+	
 	public ControleProduto() throws Exception {
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		this.fornecedor = (Usuario)context.getExternalContext().getSessionMap().get("user");
+		
+		categorias = new ArrayList<String>();
+		
+		for(Categoria categoria : Categoria.values()){
+			categorias.add(categoria.getValores());
+		}
+		
 		produtoDao = ProdutoDao.Create();
-		listarProdutos();
+		listarProdutos();		
+		
 	}
-	
-	
+		
 	
 	/***** Produto   *****/
-	/*****           *****/
+	/*****           *****/	
 	
+	//listar categorias
+		
 	//Adiciona Comprador
 	@Interceptors(AdministradorInterceptador.class)
 	public String adicionarProduto() throws Exception {		
@@ -151,5 +162,32 @@ public class ControleProduto implements Serializable {
 		this.produtoSelecionado = produtoSelecionado;
 	}
 	
-
+	
+	/******************    ******************/
+	/******************    ******************/
+	
+	//Produtos para o fornecedor escolher
+	
+	
+	
+	@Interceptors(AdministradorFornecedorInterceptador.class)
+	public String escolherProduto(){
+		
+		int quantidade = this.produtoSelecionado.getQuantidade();
+		
+		if(quantidade > 0){
+			
+			quantidade--;
+			this.produtoSelecionado.setQuantidade(quantidade);
+			List<Produto> listaDeProdutosDoFornecedor = this.fornecedor.getListaProdutos();
+			listaDeProdutosDoFornecedor.add(this.produtoSelecionado);
+			
+		}
+		else{
+			throw new RuntimeException("Erro, produto zerado no estoque");
+		}
+		
+		return "listaProdutosParaFornecedor";	
+	}
+	
 }

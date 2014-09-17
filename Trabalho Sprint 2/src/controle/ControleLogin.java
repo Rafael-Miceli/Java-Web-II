@@ -39,7 +39,7 @@ public class ControleLogin implements Serializable {
 	
 	public ControleLogin() {
 		
-		papeis = new ArrayList<>();
+		papeis = new ArrayList<String>();
 		papeis.add("comprador");
 		papeis.add("fornecedor");
 		papeis.add("admin");
@@ -64,6 +64,7 @@ public class ControleLogin implements Serializable {
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.getExternalContext().getSessionMap().put("user", usuario);
 			
+			
 			//usario administrador
 			if (usuario.getPapel().equals("admin")){
 				return "listaUsuarios";
@@ -74,7 +75,7 @@ public class ControleLogin implements Serializable {
 			}	
 			//usario fornecedor
 			else{
-				return "listaProdutos";	
+				return "listaProdutosParaFornecedor";	
 			}
 				
 		}

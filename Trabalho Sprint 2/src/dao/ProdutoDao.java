@@ -14,7 +14,7 @@ public class ProdutoDao {
 	private static ProdutoDao produtoDaoInstance;
 	
 	private ProdutoDao() {
-		produtos = new ArrayList<>();
+		produtos = new ArrayList<Produto>();
 	}
 	
 	public static ProdutoDao Create()
@@ -53,8 +53,8 @@ public class ProdutoDao {
 			if(produtoEditado.getCodigo().equals(produto.getCodigo())){
 				
 				produtoEditado.setNome(produto.getNome());
-				//produtoEditado.setCategoria(produto.getCategoria());	
-				
+				produtoEditado.setCategoria(produto.getCategoria());	
+				produtoEditado.setQuantidade(produto.getQuantidade());	
 			}			
 		}				
 	}

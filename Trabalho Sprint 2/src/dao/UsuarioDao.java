@@ -82,7 +82,7 @@ public class UsuarioDao {
 	//Lista os Usuarios
 	public List<Usuario> listarUsuariosSemPapelAdmin() throws Exception{
 		
-		List<Usuario> usuariosSemPapelAdmin = new ArrayList<>();
+		List<Usuario> usuariosSemPapelAdmin = new ArrayList<Usuario>();
 		
 		for (Usuario usuario : usuarios){
 			if(!(usuario.getPapel().equals("admin"))){
@@ -156,7 +156,7 @@ public class UsuarioDao {
 	//Lista os compradores
 	public List<Usuario> listarCompradores() throws Exception{
 		
-		List<Usuario> compradores = new ArrayList<>();
+		List<Usuario> compradores = new ArrayList<Usuario>();
 		
 		for (Usuario comprador : usuarios) 
 			if(comprador.getPapel().equals("comprador"))
@@ -201,7 +201,7 @@ public class UsuarioDao {
 	//Lista os fornecedores
 	public List<Usuario> listarFornecedores() throws Exception{
 		
-		List<Usuario> fornecedores = new ArrayList<>();
+		List<Usuario> fornecedores = new ArrayList<Usuario>();
 		
 		for (Usuario fornecedor : usuarios) 
 			if(fornecedor.getPapel().equals("fornecedor"))

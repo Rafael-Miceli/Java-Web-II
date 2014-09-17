@@ -24,13 +24,17 @@ public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@NonNull
-	@Size(min = 3, max = 50,  message = "Codigo dever ter 5 caracteres")
+	@Size(min = 5, max = 5,  message = "Codigo dever ter 5 caracteres")
 	private String codigo;
 	
 	@NonNull
-	@Size(min = 3, max = 50,  message = "Nome dever ter entre 10 a 80 caracteres")
+	@Size(min = 10, max = 80,  message = "Nome dever ter entre 10 a 80 caracteres")
 	private String nome;
 	
-	//private Categoria categoria;
+	private String categoria;
+	
+	private int quantidade;
+
+	
 	
 }

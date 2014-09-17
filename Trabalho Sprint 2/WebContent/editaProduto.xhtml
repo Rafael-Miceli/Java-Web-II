@@ -25,7 +25,16 @@
 						id="campo-nome" required="true"
 						requiredMessage="#{msg['nome.obrigatorio']}" 
 					/>					
-		 	        
+		 	        <p:outputLabel value="#{msg['categoria']} : " for="campo-categoria" />
+		 	        <p:selectOneMenu id="campo-categoria" value="#{controleProduto.produtoSelecionado.categoria}">
+                         <f:selectItems value="#{controleProduto.categorias}"/>  
+       		 		</p:selectOneMenu>
+       		 		
+       		 		<p:outputLabel value="Quantidade : " for="campo-quantidade" />
+					<p:inputText value="#{controleProduto.produtoSelecionado.quantidade}"
+						id="campo-quantidade" required="true"
+						requiredMessage="Quantidade é obrigatória" 
+					/>	
 							
 				</p:panelGrid>		
 					

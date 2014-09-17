@@ -19,9 +19,7 @@
 		<br />
 		
 		<h:form>
-			
-			<p:commandButton value="#{msg['adicionaProduto.adicionarProduto']}" action="#{controleProduto.adicionarProduto()}" />
-						
+										
 			<p:dataTable value="#{controleProduto.listaProdutos}" var="pro"
 				rendered="#{not empty controleProduto.listaProdutos}"  >
 				
@@ -35,30 +33,26 @@
 				
 				<p:column headerText="#{msg['categoria']}">
 					<h:outputText value="#{pro.categoria}" />
-				</p:column>		
+				</p:column>			
 				
 				<p:column headerText="Quantidade">
 					<h:outputText value="#{pro.quantidade}" />
-				</p:column>			
+				</p:column>	
 			
 				<p:column headerText=""> 
  					   
-	 				<h:commandLink value="#{msg['editar']}" action="#{controleProduto.editarProduto()}"> 
+	 				<h:commandLink value="Escolher" action="#{controleProduto.escolherProduto()}"> 
 	 					<f:setPropertyActionListener value="#{pro}" 
 	 												 target="#{controleProduto.produtoSelecionado}" /> 
 	 				</h:commandLink> 				 
-	 				 
-	 				<h:outputLabel value=" "/> 
-	 				 
-	 				<h:commandLink value="#{msg['excluir']}"  
-	 							   action="#{controleProduto.excluirProduto()}"> 
-	 					<f:setPropertyActionListener value="#{pro}" 
-	 												 target="#{controleProduto.produtoSelecionado}" /> 
-	 				</h:commandLink> 
- 				 
+	 				 				 
  				</p:column> 
 
 			</p:dataTable>
+			
 		</h:form>
+		
+		<p:messages autoUpdate="true"/>
+		
 	</ui:define>
 </ui:composition>

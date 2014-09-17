@@ -1,7 +1,9 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -15,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @RequiredArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Getter
 @Setter
 @Named
@@ -47,4 +48,17 @@ public class Usuario implements Serializable {
 	
 	@NonNull
 	private String papel;
+	
+	private List<Produto> listaProdutos;
+	
+	
+	public Usuario() {
+		
+		this.listaProdutos = new ArrayList<Produto>();
+
+	}
+	
 }
+
+
+
