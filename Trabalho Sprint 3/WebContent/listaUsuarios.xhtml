@@ -1,0 +1,80 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+	
+		<br />
+	
+		<h:form>
+ 		 	<p:commandLink value="#{msg['sair']}" action="#{controleLogin.sairSistema()}" />
+ 		 	<br />
+ 		 </h:form>
+			
+		<h2>#{msg['listaUsuarios.listaDeUsuarios']}</h2>	
+		
+		<br />
+		
+		<h:form>
+			
+			<p:commandButton value="#{msg['adicionaUsuario.adicionarUsuario']}" action="#{controleUsuario.adicionarUsuario()}" />
+						
+			<p:dataTable value="#{controleUsuario.listaUsuarios}" var="fdp"
+				rendered="#{not empty controleUsuario.listaUsuarios}"  >
+				
+				<p:column headerText="#{msg['nome']}">
+					<h:outputText value="#{fdp.nome}" />
+				</p:column>		
+				
+				<p:column headerText="#{msg['data.nascimento']}">
+					<h:outputText value="#{fdp.dataNascimento}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>				
+				</p:column>
+				
+				<p:column headerText="#{msg['data.cadastro']}">
+					<h:outputText value="#{fdp.dataCadastro}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>	
+				</p:column>	
+			
+				<p:column headerText="Email">
+					<h:outputText value="#{fdp.email}" />
+				</p:column>			
+				
+				<p:column headerText="#{msg['login']}">
+					<h:outputText value="#{fdp.login}" />
+				</p:column>			
+				
+				<p:column headerText="#{msg['senha']}">
+					<h:outputText value="#{fdp.senha}" />
+				</p:column>		
+				
+				<p:column headerText="#{msg['papel']}">
+					<h:outputText value="#{fdp.papel}" />
+				</p:column>		
+				
+				<p:column headerText=""> 
+ 					   
+	 				<h:commandLink value="#{msg['listaCompradores.editar']}" action="#{controleUsuario.editarUsuario()}"> 
+	 					<f:setPropertyActionListener value="#{fdp}" 
+	 												 target="#{controleUsuario.usuarioSelecionado}" /> 
+	 				</h:commandLink> 				 
+	 				 
+	 				<h:outputLabel value=" "/> 
+	 				 
+	 				<h:commandLink value="#{msg['listaCompradores.excluir']}"  
+	 							   action="#{controleUsuario.excluirUsuario()}"> 
+	 					<f:setPropertyActionListener value="#{fdp}" 
+	 												 target="#{controleUsuario.usuarioSelecionado}" /> 
+	 				</h:commandLink> 
+ 				 
+ 				</p:column> 
+
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

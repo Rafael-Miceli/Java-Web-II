@@ -1,0 +1,56 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+
+		<h1>#{msg['adicionaProduto.adicionarProduto']}</h1>
+
+			<h:form id="adicionaComprador">
+
+				<p:panelGrid columns="2">
+
+
+					<p:outputLabel value="#{msg['codigo']} : " for="campo-codigo" />
+					<p:inputText value="#{controleProduto.produtoSelecionado.codigo}"
+						id="campo-codigo" required="true"
+						requiredMessage="Codigo Obrigatorio" 
+					/>
+
+					<p:outputLabel value="#{msg['nome']} : " for="campo-nome" />
+					<p:inputText value="#{controleProduto.produtoSelecionado.nome}"
+						id="campo-nome" required="true"
+						requiredMessage="#{msg['nome.obrigatorio']}" 
+					/>		
+								
+		 	        <p:outputLabel value="#{msg['categoria']} : " for="campo-categoria" />
+		 	        <p:selectOneMenu id="campo-categoria" value="#{controleProduto.produtoSelecionado.categoria}">
+                         <f:selectItems value="#{controleProduto.categorias}"/>  
+       		 		</p:selectOneMenu>
+       		 		
+       		 		<p:outputLabel value="Quantidade : " for="campo-quantidade" />
+					<p:inputText value="#{controleProduto.produtoSelecionado.quantidade}"
+						id="campo-quantidade" required="true"
+						requiredMessage="Quantidade é obrigatória" 
+					/>		
+							
+				</p:panelGrid>		
+					
+				<br />	
+					
+				<p:commandButton
+						value="#{msg['salvar']}"
+						action="#{controleProduto.salvarNovoProduto()}" 
+				/>
+					
+						
+			</h:form>
+
+			 <p:messages autoUpdate="true"/>
+						
+			
+	</ui:define>
+</ui:composition>

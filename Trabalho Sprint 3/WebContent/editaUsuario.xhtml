@@ -1,0 +1,89 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+
+		<h1>#{msg['editaUsuario.EditarUsuario']}</h1>
+
+			<h:form>
+
+				<p:panelGrid columns="2">
+
+
+					<p:outputLabel value="#{msg['nome']} : " for="campo-nome" />
+					<p:inputText value="#{controleUsuario.usuarioSelecionado.nome}"
+						id="campo-nome" required="true"
+						requiredMessage="#{msg['nome.obrigatorio']}" 
+					/>
+						
+					
+
+					<p:outputLabel value="#{msg['data.nascimento']} : "
+						for="campo-data" />
+					<p:calendar id="campo-data"
+						value="#{controleUsuario.usuarioSelecionado.dataNascimento}"
+						pattern="dd-MM-yyyy" mask="true" 
+					/>
+					
+
+					<p:outputLabel value="Email : " for="campo-email" />
+					<p:inputText value="#{controleUsuario.usuarioSelecionado.email}"
+								 id="campo-email" 
+								 required="true"
+								 requiredMessage="#{msg['email.obrigatorio']}"
+								 validatorMessage="#{msg['email.incorreto']}">
+
+						<f:validateRegex
+							pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+
+					</p:inputText>
+					
+					
+
+					<p:outputLabel value="#{msg['login']} : " for="campo-login"  />
+					<h:inputHidden value="#{controleUsuario.usuarioSelecionado.login}"
+							     id="campo-login" 
+							     required="true"
+					 	         requiredMessage="#{msg['login.obrigatorio']}" 
+					 	         				 	        
+				     />
+				    				 	         
+		 	       
+					<p:outputLabel value="#{msg['senha']} : " for="campo-senha" />
+					<p:password value="#{controleUsuario.usuarioSelecionado.senha}"
+							     id="campo-senha" 
+							     required="true"
+					 	         requiredMessage="#{msg['senha.obrigatorio']}" 
+		 	        />
+		 	        
+		 	        <p:outputLabel value="Papel : " for="campo-papel"  />
+					<h:inputHidden value="#{controleUsuario.usuarioSelecionado.papel}"
+							     id="campo-papel" 
+							     required="true"
+					 	         requiredMessage="Papel Obrigatório" 
+					 	         				 	        
+				     />
+							
+				</p:panelGrid>		
+					
+				<br />	
+					
+				<p:commandButton
+						value="#{msg['salvar']}"
+						action="#{controleUsuario.salvarAlteracoesDoUsuario()}" 
+				/>
+					
+				
+				
+			</h:form>
+
+			 <p:messages autoUpdate="true"/>
+
+			
+			
+	</ui:define>
+</ui:composition>
