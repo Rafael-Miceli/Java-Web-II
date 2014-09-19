@@ -17,12 +17,14 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.interceptor.Interceptors;
 
+import viewmodels.ProdutosParaFornecedorModel;
 import lombok.Getter;
 import lombok.Setter;
 import modelo.Categoria;
 import modelo.Estoque;
 import modelo.Produto;
 import modelo.Usuario;
+import dao.EstoqueDao;
 import dao.ProdutoDao;
 
 @Getter
@@ -39,14 +41,14 @@ public class ControleProduto implements Serializable {
 	private List<Produto> listaProdutos = null;
 		
 	private ProdutoDao produtoDao;
-
-	private Usuario fornecedor;
 	
-	private Estoque estoqueSelecionado;
+	private EstoqueDao estoqueDao;
+
+	private Usuario fornecedor;	
 	
 	private List<String> categorias;
 	
-	private Map<String, Boolean> checkedProdutoFornecedor = new HashMap<String, Boolean>();
+	private Map<String, Boolean> produtosSelecionadosPorFornecedor = new HashMap<String, Boolean>();
 	
 		
 	@Inject
@@ -57,7 +59,7 @@ public class ControleProduto implements Serializable {
 	public ControleProduto() throws Exception {
 		
 		FacesContext context = FacesContext.getCurrentInstance();
-		this.fornecedor = (Usuario)context.getExternalContext().getSessionMap().get("user");
+		fornecedor = (Usuario)context.getExternalContext().getSessionMap().get("user");
 		
 		categorias = new ArrayList<String>();
 		
@@ -66,6 +68,7 @@ public class ControleProduto implements Serializable {
 		}
 		
 		produtoDao = ProdutoDao.Create();
+		estoqueDao = EstoqueDao.Create();
 		listarProdutos();		
 		
 	}
@@ -172,12 +175,53 @@ public class ControleProduto implements Serializable {
 		List<Produto> checkedProdutos = new ArrayList<Produto>();
 
         for (Produto item : this.listaProdutos) {
-            if (checkedProdutoFornecedor.get(item.getCodigo())) {
+            if (produtosSelecionadosPorFornecedor.get(item.getCodigo())) {
             	checkedProdutos.add(item);
             }
         }
 		
 		return "listaProdutosParaFornecedor";
+	}
+	
+	@Interceptors(AdministradorFornecedorInterceptador.class)
+	public List<ProdutosParaFornecedorModel> retornaProdutosEmEstoqueModel() throws Exception {				
+		
+		List<Estoque> produtosEmEstoque = estoqueDao.listarProdutosEmEstoquePorFornecedor(fornecedor);
+		
+		List<ProdutosParaFornecedorModel> produtosParaFornecedor = new ArrayList<ProdutosParaFornecedorModel>();
+		
+		for(Produto produto : listaProdutos){
+			ProdutosParaFornecedorModel produtoParaFornecedor = new ProdutosParaFornecedorModel();
+			Estoque produtoEmEstoque = produtoJaEmEstoque(produtosEmEstoque, produto);
+			
+			if(produtoEmEstoque != null){
+				produtoParaFornecedor.setSelecionado(true);
+				produtoParaFornecedor.setQuantidade(produtoEmEstoque.getQuantidade());
+			}
+			else{
+				produtoParaFornecedor.setSelecionado(false);
+				produtoParaFornecedor.setQuantidade(1);
+			}			
+			
+			produtoParaFornecedor.setProduto(produto);
+			
+			produtosParaFornecedor.add(produtoParaFornecedor);
+		}
+		
+		return produtosParaFornecedor;
+	}
+
+
+	private Estoque produtoJaEmEstoque(List<Estoque> produtosEmEstoque,	Produto produto) {
+		
+		for(Estoque estoque: produtosEmEstoque){
+			if(estoque.getProduto().getCodigo().equals(produto.getCodigo())){
+				return estoque;
+			}
+				
+		}
+		
+		return null;
 	}
 
 }

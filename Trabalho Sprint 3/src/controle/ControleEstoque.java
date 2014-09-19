@@ -31,7 +31,7 @@ public class ControleEstoque implements Serializable{
 	
 	//adicionar item ao estoque	
 	public String AdicionaItemEstoque() throws Exception{
-		estoquedao.adicionarEstoque(estoqueSelecionado);
+		estoquedao.adicionarProdutoEmEstoque(estoqueSelecionado);
 		
 		return "listaProdutosParaFornecedor";
 	}

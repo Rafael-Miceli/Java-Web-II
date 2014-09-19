@@ -62,7 +62,7 @@ public class ProdutoDao {
 	//Lista os compradores
 	public List<Produto> listarProdutos() throws Exception{
 		
-		return this.produtos;
+		return produtos;
 		
 	}
 		

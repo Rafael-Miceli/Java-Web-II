@@ -29,5 +29,4 @@ public class Estoque implements Serializable {
 	private int quantidade;
 	
 	private Usuario fornecedor;
-
 }

@@ -20,23 +20,27 @@
 		
 		<h:form>
 										
-			<p:dataTable value="#{controleProduto.listaProdutos}" var="pro"
+			<p:dataTable value="#{controleProduto.retornaProdutosEmEstoqueModel()}" var="pro"
 				rendered="#{not empty controleProduto.listaProdutos}"  >
 				
 				<p:column>
-					<h:selectBooleanCheckbox value="#{controleProduto.checkedProdutoFornecedor[pro.codigo]}" />
+					<h:selectBooleanCheckbox value="#{pro.selecionado}" />
 				</p:column>	
 				
 				<p:column headerText="#{msg['codigo']}">
-					<h:outputText value="#{pro.codigo}" />
+					<h:outputText value="#{pro.produto.codigo}" />
 				</p:column>	
 				
 				<p:column headerText="#{msg['nome']}">
-					<h:outputText value="#{pro.nome}" />
+					<h:outputText value="#{pro.produto.nome}" />
 				</p:column>
 				
 				<p:column headerText="#{msg['categoria']}">
-					<h:outputText value="#{pro.categoria}" />
+					<h:outputText value="#{pro.produto.categoria}" />
+				</p:column>
+				
+				<p:column headerText="#{msg['quantidade']}">
+					<h:outputText value="#{pro.quantidade}" />
 				</p:column>
 
 			</p:dataTable>
