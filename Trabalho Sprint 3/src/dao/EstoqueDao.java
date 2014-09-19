@@ -33,6 +33,16 @@ public class EstoqueDao {
 
 	}
 	
+	public void removerProdutoEmEstoque(String codigoProduto, Usuario fornecedor) throws Exception{
+		
+		for(Estoque estoque : produtosEstocados){
+			if(estoque.getProduto().getCodigo().equals(codigoProduto) && estoque.getFornecedor() == fornecedor){
+				produtosEstocados.remove(estoque);
+			}
+		}				
+
+	}
+	
 	public List<Estoque> listarProdutosEmEstoque() throws Exception{
 		
 		return produtosEstocados;

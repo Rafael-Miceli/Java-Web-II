@@ -48,7 +48,7 @@ public class ControleProduto implements Serializable {
 	
 	private List<String> categorias;
 	
-	private Map<String, Boolean> produtosSelecionadosPorFornecedor = new HashMap<String, Boolean>();
+	private List<ProdutosParaFornecedorModel> produtosParaFornecedor;
 	
 		
 	@Inject
@@ -173,11 +173,39 @@ public class ControleProduto implements Serializable {
 	public String salvarAlteracoesDeEntradaDeMercadoria() throws Exception {				
 		
 		List<Produto> checkedProdutos = new ArrayList<Produto>();
+		
+		List<Estoque> estoque = estoqueDao.listarProdutosEmEstoquePorFornecedor(fornecedor);
+		List<Produto> produtosDoEstoque = new ArrayList<Produto>();
+		
+		for(Estoque produtoNoEstoque : estoque){
+			produtosDoEstoque.add(produtoNoEstoque.getProduto());
+		}	
+		
 
-        for (Produto item : this.listaProdutos) {
-            if (produtosSelecionadosPorFornecedor.get(item.getCodigo())) {
-            	checkedProdutos.add(item);
+        for (ProdutosParaFornecedorModel item : produtosParaFornecedor) {
+            if(item.isSelecionado()){
+            	for (Produto produto : produtosDoEstoque){
+            		if(produto.getCodigo().equals(item.getProduto().getCodigo())){
+            			continue;
+            		}
+            	}
+            	
+            	Estoque novoItemParaEstoque = new Estoque();
+            	
+            	novoItemParaEstoque.setProduto(item.getProduto());
+            	novoItemParaEstoque.setFornecedor(fornecedor);
+            	novoItemParaEstoque.setQuantidade(item.getQuantidade());
+            	
+            	estoqueDao.adicionarProdutoEmEstoque(novoItemParaEstoque);
             }
+            else{
+            	for (Produto produto : produtosDoEstoque){
+            		if(produto.getCodigo().equals(item.getProduto().getCodigo())){
+            			estoqueDao.removerProdutoEmEstoque(produto.getCodigo(), fornecedor);
+            		}
+            	}
+            }
+            	
         }
 		
 		return "listaProdutosParaFornecedor";
@@ -188,7 +216,7 @@ public class ControleProduto implements Serializable {
 		
 		List<Estoque> produtosEmEstoque = estoqueDao.listarProdutosEmEstoquePorFornecedor(fornecedor);
 		
-		List<ProdutosParaFornecedorModel> produtosParaFornecedor = new ArrayList<ProdutosParaFornecedorModel>();
+		produtosParaFornecedor = new ArrayList<ProdutosParaFornecedorModel>();
 		
 		for(Produto produto : listaProdutos){
 			ProdutosParaFornecedorModel produtoParaFornecedor = new ProdutosParaFornecedorModel();
