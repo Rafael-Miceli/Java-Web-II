@@ -6,7 +6,9 @@ import interceptadores.AdministradorInterceptador;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.enterprise.context.RequestScoped;
@@ -18,6 +20,7 @@ import javax.interceptor.Interceptors;
 import lombok.Getter;
 import lombok.Setter;
 import modelo.Categoria;
+import modelo.Estoque;
 import modelo.Produto;
 import modelo.Usuario;
 import dao.ProdutoDao;
@@ -34,27 +37,16 @@ public class ControleProduto implements Serializable {
 	private Produto produtoSelecionado = new Produto();	
 	
 	private List<Produto> listaProdutos = null;
-	
-	private List<Produto> listaProdutosComQuantidadeAcimaDeZero = null;
-	
-	private List<Produto> listaProdutosComCategoriaCelular = null;
 		
-	private List<Produto> listaProdutosComCategoriaInformatica = null;
-	
-	private List<Produto> listaProdutosComCategoriaEletronico = null;
-	
-	private List<Produto> listaProdutosComCategoriaEletrodomestico = null;
-	
-	private List<Produto> listaProdutosComCategoriaMovel = null;
-	
-	private List<Produto> listaProdutosComCategoriaEsporte = null;
-	
 	private ProdutoDao produtoDao;
 
 	private Usuario fornecedor;
 	
+	private Estoque estoqueSelecionado;
 	
 	private List<String> categorias;
+	
+	private Map<String, Boolean> checkedProdutoFornecedor = new HashMap<String, Boolean>();
 	
 		
 	@Inject
@@ -63,14 +55,6 @@ public class ControleProduto implements Serializable {
 	
 	
 	public ControleProduto() throws Exception {
-		
-		listarProdutosComQtdAcimaDeZero();
-		listarProdutosComCategoriaCelular();
-		listarProdutosComCategoriaInformatica();
-		listarProdutosComCategoriaEletronico();
-		listarProdutosComCategoriaEletrodomestico();
-		listarProdutosComCategoriaMovel();
-		listarProdutosComCategoriaEsporte();
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		this.fornecedor = (Usuario)context.getExternalContext().getSessionMap().get("user");
@@ -107,24 +91,15 @@ public class ControleProduto implements Serializable {
 		for (Produto produto : listaProdutos) {
 			if(produtoSelecionado.getCodigo().equals(produto.getCodigo())){
 							
-				 throw new RuntimeException(messages.getString("login.de.outro.usuario"));
-				
-				//FacesMessage message = new FacesMessage("Login já existe");
-	            //FacesContext context = FacesContext.getCurrentInstance();
-	            //context.addMessage(this.campoLogin.getClientId(context), message);
-				
-	            /*FacesContext context = FacesContext.getCurrentInstance();  
-		          
-		        context.addMessage(null, new FacesMessage("Successful", "Hello "));  
-		        context.addMessage(null, new FacesMessage("Second Message", "Additional Info Here..."));*/ 					       
+				 throw new RuntimeException(messages.getString("login.de.outro.usuario"));				
+							       
 			}
 		}
 		
 		produtoDao.adicionarProduto(produtoSelecionado);
 		listarProdutos();
-		listarProdutosComQtdAcimaDeZero();
 		
-		return "listaProdutos";
+		return "PainelAdmin";
 	}
 		
 		
@@ -140,7 +115,6 @@ public class ControleProduto implements Serializable {
 				
 		produtoDao.editarProduto(produtoSelecionado);
 		listarProdutos();
-		listarProdutosComQtdAcimaDeZero();
 		
 		return "listaProdutos";
 	}
@@ -151,7 +125,6 @@ public class ControleProduto implements Serializable {
 	public String excluirProduto() throws Exception {
 		produtoDao.excluirProduto(produtoSelecionado);
 		listarProdutos();
-		listarProdutosComQtdAcimaDeZero();
 		return "listaProdutos";
 	}
 		
@@ -163,14 +136,14 @@ public class ControleProduto implements Serializable {
 		
 	
 	// Lista os Produtos
-	@Interceptors(AdministradorInterceptador.class)
+	@Interceptors(AdministradorFornecedorInterceptador.class)
 	public List<Produto> listarProdutos() throws Exception {
 		
-		listaProdutos = produtoDao.listarProdutos();	
+		listaProdutos = produtoDao.listarProdutos();		
 		return listaProdutos;
 	}
 	
-	@Interceptors(AdministradorInterceptador.class)
+	@Interceptors(AdministradorFornecedorInterceptador.class)
 	public void setListarProdutos(List<Produto> listarProdutos){
 		this.listaProdutos = listarProdutos; 
 	}
@@ -189,136 +162,25 @@ public class ControleProduto implements Serializable {
 	
 	
 	/******************    ******************/
-	/******************    ******************/
+	/******************    ******************/	
 	
-	//Produtos para o fornecedor escolher
-		
+	
+	//Salva alterações do Produto
 	@Interceptors(AdministradorFornecedorInterceptador.class)
-	public String escolherProduto(){
+	public String salvarAlteracoesDeEntradaDeMercadoria() throws Exception {				
 		
-		int quantidade = this.produtoSelecionado.getQuantidade();
+		List<Produto> checkedProdutos = new ArrayList<Produto>();
+
+        for (Produto item : this.listaProdutos) {
+            if (checkedProdutoFornecedor.get(item.getCodigo())) {
+            	checkedProdutos.add(item);
+            }
+        }
 		
-		if(quantidade > 0){
-			
-			quantidade--;
-			this.produtoSelecionado.setQuantidade(quantidade);
-			List<Produto> listaDeProdutosDoFornecedor = this.fornecedor.getListaProdutos();
-			listaDeProdutosDoFornecedor.add(this.produtoSelecionado);
-			
-		}
-		else{
-			throw new RuntimeException("Erro, produto zerado no estoque");
-		}
-		
-		return "listaProdutosParaFornecedor";	
+		return "listaProdutosParaFornecedor";
 	}
-	 
-	// Lista os Produtos com quantidade acima de zero
-	@Interceptors(AdministradorFornecedorInterceptador.class)
-	public List<Produto> listarProdutosComQtdAcimaDeZero() throws Exception {
-		
-		listaProdutos = produtoDao.listarProdutos();
-			
-		for(Produto produto : listaProdutos){
-			if(produto.getQuantidade() > 0){
-				listaProdutosComQuantidadeAcimaDeZero.add(produto);
-			}
-		}
-		
-		return listaProdutosComQuantidadeAcimaDeZero;
-	}
-	
-	/******************    ******************/
-	/******************    ******************/
-	
-	//Produtos com a categoria Celular
-	@Interceptors(AdministradorFornecedorInterceptador.class)
-	public List<Produto> listarProdutosComCategoriaCelular() throws Exception {
-		
-		listaProdutos = produtoDao.listarProdutos();
-			
-		for(Produto produto : listaProdutos){
-			if(produto.getCategoria().equals(Categoria.CELULAR)){
-				listaProdutosComCategoriaCelular.add(produto);
-			}
-		}
-		
-		return listaProdutosComCategoriaCelular;
-	}
-	
-	//Produtos com a categoria Informática
-	@Interceptors(AdministradorFornecedorInterceptador.class)
-	public List<Produto> listarProdutosComCategoriaInformatica() throws Exception {
-		
-		listaProdutos = produtoDao.listarProdutos();
-			
-		for(Produto produto : listaProdutos){
-			if(produto.getCategoria().equals(Categoria.INFORMATICA)){
-				listaProdutosComCategoriaCelular.add(produto);
-			}
-		}
-		
-		return listaProdutosComCategoriaInformatica;
-	}
-	
-	//Produtos com a categoria Eletronico
-	@Interceptors(AdministradorFornecedorInterceptador.class)
-	public List<Produto> listarProdutosComCategoriaEletronico() throws Exception {
-		
-		listaProdutos = produtoDao.listarProdutos();
-			
-		for(Produto produto : listaProdutos){
-			if(produto.getCategoria().equals(Categoria.ELETRONICO)){
-				listaProdutosComCategoriaEletronico.add(produto);
-			}
-		}
-		
-		return listaProdutosComCategoriaEletronico;
-	}
-	
-	//Produtos com a categoria Eletrodomestico
-	@Interceptors(AdministradorFornecedorInterceptador.class)
-	public List<Produto> listarProdutosComCategoriaEletrodomestico() throws Exception {
-		
-		listaProdutos = produtoDao.listarProdutos();
-			
-		for(Produto produto : listaProdutos){
-			if(produto.getCategoria().equals(Categoria.ELETRODOMESTICO)){
-				listaProdutosComCategoriaEletrodomestico.add(produto);
-			}
-		}
-		
-		return listaProdutosComCategoriaEletrodomestico;
-	}
-	
-	//Produtos com a categoria Móvel
-	@Interceptors(AdministradorFornecedorInterceptador.class)
-	public List<Produto> listarProdutosComCategoriaMovel() throws Exception {
-		
-		listaProdutos = produtoDao.listarProdutos();
-			
-		for(Produto produto : listaProdutos){
-			if(produto.getCategoria().equals(Categoria.MOVEL)){
-				listaProdutosComCategoriaMovel.add(produto);
-			}
-		}
-		
-		return listaProdutosComCategoriaMovel;
-	}
-	
-	//Produtos com a categoria Esporte
-	@Interceptors(AdministradorFornecedorInterceptador.class)
-	public List<Produto> listarProdutosComCategoriaEsporte() throws Exception {
-		
-		listaProdutos = produtoDao.listarProdutos();
-			
-		for(Produto produto : listaProdutos){
-			if(produto.getCategoria().equals(Categoria.ESPORTE)){
-				listaProdutosComCategoriaEsporte.add(produto);
-			}
-		}
-		
-		return listaProdutosComCategoriaEsporte;
-	}
-	
+
 }
+
+
+

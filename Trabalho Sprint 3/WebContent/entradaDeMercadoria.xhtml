@@ -1,0 +1,45 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+
+		<h1>#{msg['editaProduto.EditarProduto']}</h1>
+
+			<h:form id="entradaDeMercadoria">
+
+				<p:panelGrid columns="2">
+
+
+					<p:outputLabel value="#{msg['codigo']} : " for="campo-codigo" />
+					<h:inputHidden value="#{controleProduto.produtoSelecionado.codigo}" id="campo-codigo"/>
+
+					<p:outputLabel value="#{msg['categoria']} : " for="campo-categoria" />
+		 	    	<h:inputHidden value="#{controleProduto.produtoSelecionado.categoria}" id="campo-categoria"/>
+                               		 		
+       		 		<p:outputLabel value="Quantidade : " for="campo-quantidade" />
+					<p:inputText value="#{controleProduto.estoqueSelecionado.quantidade}"
+						id="campo-quantidade" required="true"
+						requiredMessage="Quantidade é obrigatória" 
+					/>	
+							
+				</p:panelGrid>		
+					
+				<br />	
+					
+				<p:commandButton
+						value="#{msg['salvar']}"
+						action="#{controleProduto.salvarAlteracoesDeEntradaDeMercadoria()}" 
+				/>
+					
+						
+			</h:form>
+
+			 <p:messages autoUpdate="true"/>
+						
+			
+	</ui:define>
+</ui:composition>

@@ -54,7 +54,7 @@ public class ProdutoDao {
 				
 				produtoEditado.setNome(produto.getNome());
 				produtoEditado.setCategoria(produto.getCategoria());	
-				produtoEditado.setQuantidade(produto.getQuantidade());	
+//				produtoEditado.setQuantidade(produto.getQuantidade());	
 			}			
 		}				
 	}

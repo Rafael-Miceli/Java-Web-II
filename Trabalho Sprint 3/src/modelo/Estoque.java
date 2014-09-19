@@ -13,24 +13,21 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-@RequiredArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
+
 @Getter
 @Setter
 @Named
 @SessionScoped
-public class Produto implements Serializable {
+public class Estoque implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	
+	private Produto produto;
+	
+	@Size(min = 1, message = "Deve selecionar pelo menos 1 produto")
+	private int quantidade;
+	
+	private Usuario fornecedor;
 
-	@NonNull
-	@Size(min = 5, max = 5,  message = "Codigo dever ter 5 caracteres")
-	private String codigo;
-	
-	@NonNull
-	@Size(min = 10, max = 80,  message = "Nome dever ter entre 10 a 80 caracteres")
-	private String nome;
-	
-	private String categoria;	
-	
 }

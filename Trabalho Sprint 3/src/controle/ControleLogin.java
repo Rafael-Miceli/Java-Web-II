@@ -30,6 +30,8 @@ public class ControleLogin implements Serializable {
 	
 	private List<String> papeis;
 	
+	private String login; 
+	
 	@Inject
 	private Usuario usuario;
 
@@ -64,14 +66,15 @@ public class ControleLogin implements Serializable {
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.getExternalContext().getSessionMap().put("user", usuario);
 			
+			login = context.getExternalContext().getSessionMap().put("user", usuario).toString();
 			
 			//usario administrador
 			if (usuario.getPapel().equals("admin")){
-				return "listaUsuarios";
+				return "PainelAdmin";
 			}	
 			//usuario comprador
 			else if (usuario.getPapel().equals("comprador")){
-				return "paginaCompras";		
+				return "paginaConstrucao";		
 			}	
 			//usario fornecedor
 			else{
@@ -89,4 +92,10 @@ public class ControleLogin implements Serializable {
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		return "login";
 	}
+	
+	public void PegarUsuario(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		login = context.getExternalContext().getSessionMap().put("user", usuario).toString();
+	}
+	
 }

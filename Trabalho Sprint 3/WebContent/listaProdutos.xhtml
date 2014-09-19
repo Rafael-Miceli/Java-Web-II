@@ -10,11 +10,8 @@
 		<br />
 	
 		<h:form>
-		
  		 	<p:commandLink value="#{msg['sair']}" action="#{controleLogin.sairSistema()}" />
- 		 	
  		 	<br />
- 		 	
  		 </h:form>
 			
 		<h2>#{msg['listaProdutos.listaDeProdutos']}</h2>	
@@ -25,29 +22,27 @@
 			
 			<p:commandButton value="#{msg['adicionaProduto.adicionarProduto']}" action="#{controleProduto.adicionarProduto()}" />
 						
-			<p:dataTable value="#{controleProduto.listaProdutos}" var="prd"
+			<p:dataTable value="#{controleProduto.listaProdutos}" var="pro"
 				rendered="#{not empty controleProduto.listaProdutos}"  >
 				
 				<p:column headerText="#{msg['codigo']}">
-					<h:outputText value="#{prd.codigo}" />
+					<h:outputText value="#{pro.codigo}" />
 				</p:column>	
 				
 				<p:column headerText="#{msg['nome']}">
-					<h:outputText value="#{prd.nome}" />
+					<h:outputText value="#{pro.nome}" />
 				</p:column>
 				
 				<p:column headerText="#{msg['categoria']}">
-					<h:outputText value="#{prd.categoria}" />
+					<h:outputText value="#{pro.categoria}" />
 				</p:column>		
 				
-				<p:column headerText="Quantidade">
-					<h:outputText value="#{prd.quantidade}" />
-				</p:column>			
+			
 			
 				<p:column headerText=""> 
  					   
 	 				<h:commandLink value="#{msg['editar']}" action="#{controleProduto.editarProduto()}"> 
-	 					<f:setPropertyActionListener value="#{prd}" 
+	 					<f:setPropertyActionListener value="#{pro}" 
 	 												 target="#{controleProduto.produtoSelecionado}" /> 
 	 				</h:commandLink> 				 
 	 				 
@@ -55,16 +50,13 @@
 	 				 
 	 				<h:commandLink value="#{msg['excluir']}"  
 	 							   action="#{controleProduto.excluirProduto()}"> 
-	 					<f:setPropertyActionListener value="#{prd}" 
+	 					<f:setPropertyActionListener value="#{pro}" 
 	 												 target="#{controleProduto.produtoSelecionado}" /> 
 	 				</h:commandLink> 
  				 
  				</p:column> 
 
 			</p:dataTable>
-			
 		</h:form>
-		
 	</ui:define>
-	
 </ui:composition>

@@ -1,0 +1,132 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+	
+		
+		<h:form>
+		<p:menubar>
+				<p:submenu label="Cadastros" icon="ui-icon-document">
+				<p:menuitem value="#{msg['adicionaUsuario.adicionarUsuario']}" action="#{controleUsuario.adicionarUsuario()}" />
+				<p:menuitem value="#{msg['adicionaProduto.adicionarProduto']}" action="#{controleProduto.adicionarProduto()}" />
+				<p:separator/>
+				<p:menuitem value="#{msg['sair']}" action="#{controleLogin.sairSistema()}" icon="ui-icon-close" />
+				</p:submenu>
+				
+			</p:menubar>
+			</h:form>
+		
+			
+			<h:form>
+				<p:panel id="listadeUsuarios" header="lista de Usuarios" toggleable="true" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel">
+				<p:panelGrid columns="1">
+				
+				<p:dataTable value="#{controleUsuario.listaUsuarios}" var="fdp"
+				rendered="#{not empty controleUsuario.listaUsuarios}"  >
+				
+				<p:column headerText="#{msg['nome']}">
+					<h:outputText value="#{fdp.nome}" />
+				</p:column>		
+				
+				<p:column headerText="#{msg['data.nascimento']}">
+					<h:outputText value="#{fdp.dataNascimento}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>				
+				</p:column>
+				
+				<p:column headerText="#{msg['data.cadastro']}">
+					<h:outputText value="#{fdp.dataCadastro}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>	
+				</p:column>	
+			
+				<p:column headerText="Email">
+					<h:outputText value="#{fdp.email}" />
+				</p:column>			
+				
+				<p:column headerText="#{msg['login']}">
+					<h:outputText value="#{fdp.login}" />
+				</p:column>			
+				
+				<p:column headerText="#{msg['senha']}">
+					<h:outputText value="#{fdp.senha}" />
+				</p:column>		
+				
+				<p:column headerText="#{msg['papel']}">
+					<h:outputText value="#{fdp.papel}" />
+				</p:column>		
+				
+				<p:column headerText=""> 
+ 					   
+	 				<h:commandLink value="#{msg['listaCompradores.editar']}" action="#{controleUsuario.editarUsuario()}"> 
+	 					<f:setPropertyActionListener value="#{fdp}" 
+	 												 target="#{controleUsuario.usuarioSelecionado}" /> 
+	 				</h:commandLink> 				 
+	 				 
+	 				<h:outputLabel value=" "/> 
+	 				 
+	 				<h:commandLink value="#{msg['listaCompradores.excluir']}"  
+	 							   action="#{controleUsuario.excluirUsuario()}"> 
+	 					<f:setPropertyActionListener value="#{fdp}" 
+	 												 target="#{controleUsuario.usuarioSelecionado}" /> 
+	 				</h:commandLink> 
+ 				 
+ 				</p:column> 
+
+			</p:dataTable>
+				
+				</p:panelGrid>
+				</p:panel>
+				
+				
+				<p:panel id="listadeProdutos" header="lista de Produtos" toggleable="true" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel1">
+				<p:panelGrid columns="1">
+				<p:dataTable value="#{controleProduto.listaProdutos}" var="pro"
+				rendered="#{not empty controleProduto.listaProdutos}"  >
+				
+				<p:column headerText="#{msg['codigo']}">
+					<h:outputText value="#{pro.codigo}" />
+				</p:column>	
+				
+				<p:column headerText="#{msg['nome']}">
+					<h:outputText value="#{pro.nome}" />
+				</p:column>
+				
+				<p:column headerText="#{msg['categoria']}">
+					<h:outputText value="#{pro.categoria}" />
+				</p:column>		
+				
+							
+			
+				<p:column headerText=""> 
+ 					   
+	 				<h:commandLink value="#{msg['editar']}" action="#{controleProduto.editarProduto()}"> 
+	 					<f:setPropertyActionListener value="#{pro}" 
+	 												 target="#{controleProduto.produtoSelecionado}" /> 
+	 				</h:commandLink> 				 
+	 				 
+	 				<h:outputLabel value=" "/> 
+	 				 
+	 				<h:commandLink value="#{msg['excluir']}"  
+	 							   action="#{controleProduto.excluirProduto()}"> 
+	 					<f:setPropertyActionListener value="#{pro}" 
+	 												 target="#{controleProduto.produtoSelecionado}" /> 
+	 				</h:commandLink> 
+ 				 
+ 				</p:column> 
+
+			</p:dataTable>
+				</p:panelGrid>
+				</p:panel>
+				
+			</h:form>
+			<h:form>
+			
+			
+		</h:form>
+	</ui:define>
+</ui:composition>

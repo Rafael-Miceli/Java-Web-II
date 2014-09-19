@@ -102,13 +102,8 @@ public class ControleUsuario implements Serializable {
 					
 					FacesMessage message = new FacesMessage("Login já existe");
 		            FacesContext context = FacesContext.getCurrentInstance();
-		            context.addMessage(this.campoLogin.getClientId(context), message);
-					
-		            /*FacesContext context = FacesContext.getCurrentInstance();  
-			          
-			        context.addMessage(null, new FacesMessage("Successful", "Hello "));  
-			        context.addMessage(null, new FacesMessage("Second Message", "Additional Info Here..."));  
-			        throw new RuntimeException(messages.getString("login.de.outro.usuario"));*/
+		            context.addMessage(this.campoLogin.getClientId(context), message);				
+		          
 				}				
 			}			
 		}
@@ -120,7 +115,7 @@ public class ControleUsuario implements Serializable {
 		usuarioDao.adicionarUsuario(usuarioSelecionado);
 		listarUsuarios();
 		
-		return "listaUsuarios";
+		return "PainelAdmin";
 	}
 	
 	// Editar Usuário
@@ -138,193 +133,17 @@ public class ControleUsuario implements Serializable {
 		usuarioDao.editarUsuario(usuarioSelecionado);
 		listarUsuarios();
 		
-		return "listaUsuarios";
+		return "PainelAdmin";
 	}
 	
 	// Exclui Usuario
 	public String excluirUsuario() throws Exception {
 		usuarioDao.excluirUsuario(usuarioSelecionado);
 		listarUsuarios();
-		return "listaUsuarios";
+		return "PainelAdmin";
 	}
 	
 	
 	
 	
-	/***** Comprador *****/
-	/*****           *****/
-	
-	//Adiciona Comprador
-	/*public String adicionarComprador() throws Exception {		
-		usuarioSelecionado = new Usuario();	
-		
-		return "adicionaComprador";
-	}
-	
-	//Salva Novo comprador
-	public String salvarNovoComprador() throws Exception {
-				
-		for (Usuario comprador : listaCompradores) {
-			if(usuarioSelecionado.getLogin().equals(comprador.getLogin())){
-								
-				FacesMessage message = new FacesMessage("Login já existe");
-	            FacesContext context = FacesContext.getCurrentInstance();
-	            context.addMessage(this.campoLogin.getClientId(context), message);
-				
-	            //FacesContext context = FacesContext.getCurrentInstance();  
-		          
-		        //context.addMessage(null, new FacesMessage("Successful", "Hello "));  
-		        //context.addMessage(null, new FacesMessage("Second Message", "Additional Info Here..."));  
-		        //throw new RuntimeException(messages.getString("login.de.outro.usuario"));
-			}
-		}
-		
-		usuarioSelecionado.setPapel("comprador");
-		usuarioDao.adicionarUsuario(usuarioSelecionado);
-		listarCompradores();
-		
-		return "listaCompradores";
-	}
-		
-		
-	// Editar Comprador
-	public String editarComprador() {		
-		return "editaComprador";
-	}
-	
-	//Salva alterações do comprador
-	public String salvarAlteracoesDoComprador() throws Exception {
-				
-		usuarioDao.editarComprador(usuarioSelecionado);
-		listarCompradores();
-		
-		return "listaCompradores";
-	}
-	
-	// Exclui Comprador
-	public String excluirComprador() throws Exception {
-		usuarioDao.excluirComprador(usuarioSelecionado);
-		listarCompradores();
-		return "listaCompradores";
-	}*/
-	
-	
-	/*****           *****/
-	/***** Fornecedor *****/
-	/*****           *****/
-
-	//Adiciona Fornecedor
-	/*public String adicionarFornecedor() throws Exception {	
-		
-		usuarioSelecionado = new Usuario();	
-		
-		Date dataAtual = new Date();
-		
-		usuarioSelecionado.setDataCadastro(dataAtual);
-		
-		return "adicionaFornecedor";
-	}
-	
-	//Salva Novo Fornecedor
-	public String salvarNovoFornecedor() throws Exception {
-		
-		for (Usuario fornecedor : listaFornecedores) {
-								
-			if(usuarioSelecionado.getLogin().equals(fornecedor.getLogin())){
-				
-				FacesMessage message = new FacesMessage("Login já existe");
-	            FacesContext context = FacesContext.getCurrentInstance();
-	            context.addMessage(this.campoLogin.getClientId(context), message);
-				
-	            //FacesContext context = FacesContext.getCurrentInstance();  
-		          
-		        //context.addMessage(null, new FacesMessage("Successful", "Hello "));  
-		        //context.addMessage(null, new FacesMessage("Second Message", "Additional Info Here..."));  
-		        //throw new RuntimeException(messages.getString("login.de.outro.usuario"));
-			}		
-				
-		}
-		
-		usuarioSelecionado.setPapel("fornecedor");
-		usuarioDao.adicionarUsuario(usuarioSelecionado);
-		listarFornecedores();
-		
-		return "listaFornecedores";
-	}
-		
-	
-	// Editar Comprador
-	public String editarFornecedor() {	
-		
-		Date dataAtual = new Date();
-		
-		usuarioSelecionado.setDataCadastro(dataAtual);
-		
-		return "editarFornecedor";
-	}
-	
-	//Salva alterações do fornecedor
-	public String salvarAlteracoesDoFornecedor() throws Exception {
-		
-		usuarioDao.editarFornecedor(usuarioSelecionado);
-		listarFornecedores();
-		
-		return "listaFornecedores";
-	}
-
-	
-	// Exclui Usuário
-	public String excluirFornecedor() throws Exception {
-		usuarioDao.excluirFornecedor(usuarioSelecionado);
-		listarFornecedores();
-		return "listaFornecedores";
-	}*/
-		
-	
-
-	/******************    ******************/
-	/******************    ******************/
-			
-		
-	
-	// Lista os compradores
-	/*public List<Usuario> listarCompradores() throws Exception {
-		
-		listaCompradores = usuarioDao.listarCompradores();		
-		return listaCompradores;
-	}
-	
-	
-	public void setListarCompradores(List<Usuario> listarCompradores){
-		this.listaCompradores = listarCompradores; 
-	}
-	
-	// Lista os fornecedores
-	public List<Usuario> listarFornecedores() throws Exception {
-		
-		listaFornecedores = usuarioDao.listarFornecedores();		
-		return listaFornecedores;
-	}
-	
-	
-	public void setListarFornecedores(List<Usuario> listarFornecedores){
-		this.listaFornecedores = listarFornecedores; 
-	}*/
-	
-	
-	
-	
-	//FacesContext.getCurrentInstance().addMessage("campoLogin", 
-	  //new FacesMessage(FacesMessage.SEVERITY_INFO,"Login já existe", "Login já existe"));  
-    //throw new RuntimeException(messages.getString("login.de.outro.usuario"));
-
-    //campoLogin.getClientId(FacesContext.getCurrentInstance());
-    //FacesContext.getCurrentInstance().addMessage(campoLogin, "sua mensagem aqui");
-
-    //this.campoLogin.getClientId(FacesContext.getCurrentInstance(), "sua mensagem aqui");
-		
-	  //FacesContext.getCurrentInstance().addMessage("adicionaComprador:campoLogin", new FacesMessage("Erro", "Erro"));
-		 
-	  //throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "msg", "msg"));
-		
 }

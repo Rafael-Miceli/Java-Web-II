@@ -3,7 +3,9 @@ package modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -49,12 +51,17 @@ public class Usuario implements Serializable {
 	@NonNull
 	private String papel;
 	
-	private List<Produto> listaProdutos;
+	//Para o comprador
+	private List<Produto> listaProdutosComprador;
+	
+	//Para o fornecedor
+	private List<Estoque> fornecimentoEstoque;
 	
 	
 	public Usuario() {
 		
-		this.listaProdutos = new ArrayList<Produto>();
+		this.listaProdutosComprador = new ArrayList<Produto>();
+		this.fornecimentoEstoque = new ArrayList<Estoque>();
 
 	}
 	

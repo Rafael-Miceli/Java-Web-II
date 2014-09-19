@@ -21,7 +21,7 @@
 		<h:form>
 			
 			<p:commandButton value="#{msg['adicionaUsuario.adicionarUsuario']}" action="#{controleUsuario.adicionarUsuario()}" />
-						
+						<p:commandButton value="#{msg['adicionaProduto.adicionarProduto']}" action="#{controleProduto.adicionarProduto()}" />
 			<p:dataTable value="#{controleUsuario.listaUsuarios}" var="fdp"
 				rendered="#{not empty controleUsuario.listaUsuarios}"  >
 				

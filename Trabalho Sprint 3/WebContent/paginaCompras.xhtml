@@ -20,26 +20,28 @@
 		<h:form>
 			
 			<p:commandButton value="#{msg['adicionaProduto.adicionarProduto']}" action="#{controleProduto.adicionarProduto()}" />
+					
+			<h2>Categoria Celular</h2>	
 						
-			<p:dataTable value="#{controleProduto.listaProdutos}" var="prod"
-				rendered="#{not empty controleProduto.listaProdutos}"  >
+			<p:dataTable value="#{controleProduto.listaProdutosComCategoriaCelular}" var="prod01"
+				rendered="#{not empty controleProduto.listaProdutosComCategoriaCelular}"  >
 				
 				<p:column headerText="#{msg['codigo']}">
-					<h:outputText value="#{prod.codigo}" />
+					<h:outputText value="#{prod01.codigo}" />
 				</p:column>	
 				
 				<p:column headerText="#{msg['nome']}">
-					<h:outputText value="#{prod.nome}" />
+					<h:outputText value="#{prod01.nome}" />
 				</p:column>
 				
 				<p:column headerText="Quantidade">
-					<h:outputText value="#{prod.quantidade}" />
+					<h:outputText value="#{prod01.quantidade}" />
 				</p:column>			
 			
 				<p:column headerText=""> 
  					   
 	 				<h:commandLink value="#{msg['editar']}" action="#{controleProduto.editarProduto()}"> 
-	 					<f:setPropertyActionListener value="#{prod}" 
+	 					<f:setPropertyActionListener value="#{prod01}" 
 	 												 target="#{controleProduto.produtoSelecionado}" /> 
 	 				</h:commandLink> 				 
 	 				 
@@ -47,7 +49,187 @@
 	 				 
 	 				<h:commandLink value="#{msg['excluir']}"  
 	 							   action="#{controleProduto.excluirProduto()}"> 
-	 					<f:setPropertyActionListener value="#{prod}" 
+	 					<f:setPropertyActionListener value="#{prod01}" 
+	 												 target="#{controleProduto.produtoSelecionado}" /> 
+	 				</h:commandLink> 
+ 				 
+ 				</p:column> 
+
+			</p:dataTable>
+			
+			<h2>Categoria Informatica</h2>	
+			
+			<p:dataTable value="#{controleProduto.listaProdutosComCategoriaInformatica}" var="prod02"
+				rendered="#{not empty controleProduto.listaProdutosComCategoriaInformatica}"  >
+				
+				<p:column headerText="#{msg['codigo']}">
+					<h:outputText value="#{prod02.codigo}" />
+				</p:column>	
+				
+				<p:column headerText="#{msg['nome']}">
+					<h:outputText value="#{prod02.nome}" />
+				</p:column>
+				
+				<p:column headerText="Quantidade">
+					<h:outputText value="#{prod02.quantidade}" />
+				</p:column>			
+			
+				<p:column headerText=""> 
+ 					   
+	 				<h:commandLink value="#{msg['editar']}" action="#{controleProduto.editarProduto()}"> 
+	 					<f:setPropertyActionListener value="#{prod02}" 
+	 												 target="#{controleProduto.produtoSelecionado}" /> 
+	 				</h:commandLink> 				 
+	 				 
+	 				<h:outputLabel value=" "/> 
+	 				 
+	 				<h:commandLink value="#{msg['excluir']}"  
+	 							   action="#{controleProduto.excluirProduto()}"> 
+	 					<f:setPropertyActionListener value="#{prod02}" 
+	 												 target="#{controleProduto.produtoSelecionado}" /> 
+	 				</h:commandLink> 
+ 				 
+ 				</p:column> 
+
+			</p:dataTable>
+			
+			<h2>Categoria Eletronico</h2>	
+			
+			<p:dataTable value="#{controleProduto.listaProdutosComCategoriaEletronico}" var="prod03"
+				rendered="#{not empty controleProduto.listaProdutosComCategoriaEletronico}"  >
+				
+				<p:column headerText="#{msg['codigo']}">
+					<h:outputText value="#{prod03.codigo}" />
+				</p:column>	
+				
+				<p:column headerText="#{msg['nome']}">
+					<h:outputText value="#{prod03.nome}" />
+				</p:column>
+				
+				<p:column headerText="Quantidade">
+					<h:outputText value="#{prod03.quantidade}" />
+				</p:column>			
+			
+				<p:column headerText=""> 
+ 					   
+	 				<h:commandLink value="#{msg['editar']}" action="#{controleProduto.editarProduto()}"> 
+	 					<f:setPropertyActionListener value="#{prod03}" 
+	 												 target="#{controleProduto.produtoSelecionado}" /> 
+	 				</h:commandLink> 				 
+	 				 
+	 				<h:outputLabel value=" "/> 
+	 				 
+	 				<h:commandLink value="#{msg['excluir']}"  
+	 							   action="#{controleProduto.excluirProduto()}"> 
+	 					<f:setPropertyActionListener value="#{prod03}" 
+	 												 target="#{controleProduto.produtoSelecionado}" /> 
+	 				</h:commandLink> 
+ 				 
+ 				</p:column> 
+
+			</p:dataTable>
+			
+			<h2>Categoria Eletrodomestico</h2>
+			
+			<p:dataTable value="#{controleProduto.listaProdutosComCategoriaEletrodomestico}" var="prod04"
+				rendered="#{not empty controleProduto.listaProdutosComCategoriaEletrodomestico}"  >
+				
+				<p:column headerText="#{msg['codigo']}">
+					<h:outputText value="#{prod04.codigo}" />
+				</p:column>	
+				
+				<p:column headerText="#{msg['nome']}">
+					<h:outputText value="#{prod04.nome}" />
+				</p:column>
+				
+				<p:column headerText="Quantidade">
+					<h:outputText value="#{prod04.quantidade}" />
+				</p:column>			
+			
+				<p:column headerText=""> 
+ 					   
+	 				<h:commandLink value="#{msg['editar']}" action="#{controleProduto.editarProduto()}"> 
+	 					<f:setPropertyActionListener value="#{prod04}" 
+	 												 target="#{controleProduto.produtoSelecionado}" /> 
+	 				</h:commandLink> 				 
+	 				 
+	 				<h:outputLabel value=" "/> 
+	 				 
+	 				<h:commandLink value="#{msg['excluir']}"  
+	 							   action="#{controleProduto.excluirProduto()}"> 
+	 					<f:setPropertyActionListener value="#{prod04}" 
+	 												 target="#{controleProduto.produtoSelecionado}" /> 
+	 				</h:commandLink> 
+ 				 
+ 				</p:column> 
+
+			</p:dataTable>
+			
+			<h2>Categoria Movel</h2>
+			
+			<p:dataTable value="#{controleProduto.listaProdutosComCategoriaMovel}" var="prod05"
+				rendered="#{not empty controleProduto.listaProdutosComCategoriaMovel}"  >
+				
+				<p:column headerText="#{msg['codigo']}">
+					<h:outputText value="#{prod05.codigo}" />
+				</p:column>	
+				
+				<p:column headerText="#{msg['nome']}">
+					<h:outputText value="#{prod05.nome}" />
+				</p:column>
+				
+				<p:column headerText="Quantidade">
+					<h:outputText value="#{prod05.quantidade}" />
+				</p:column>			
+			
+				<p:column headerText=""> 
+ 					   
+	 				<h:commandLink value="#{msg['editar']}" action="#{controleProduto.editarProduto()}"> 
+	 					<f:setPropertyActionListener value="#{prod05}" 
+	 												 target="#{controleProduto.produtoSelecionado}" /> 
+	 				</h:commandLink> 				 
+	 				 
+	 				<h:outputLabel value=" "/> 
+	 				 
+	 				<h:commandLink value="#{msg['excluir']}"  
+	 							   action="#{controleProduto.excluirProduto()}"> 
+	 					<f:setPropertyActionListener value="#{prod05}" 
+	 												 target="#{controleProduto.produtoSelecionado}" /> 
+	 				</h:commandLink> 
+ 				 
+ 				</p:column> 
+
+			</p:dataTable>
+			
+			<h2>Categoria Esporte</h2>
+			
+			<p:dataTable value="#{controleProduto.listaProdutosComCategoriaEsporte}" var="prod06"
+				rendered="#{not empty controleProduto.listaProdutosComCategoriaEsporte}"  >
+				
+				<p:column headerText="#{msg['codigo']}">
+					<h:outputText value="#{prod06.codigo}" />
+				</p:column>	
+				
+				<p:column headerText="#{msg['nome']}">
+					<h:outputText value="#{prod06.nome}" />
+				</p:column>
+				
+				<p:column headerText="Quantidade">
+					<h:outputText value="#{prod06.quantidade}" />
+				</p:column>			
+			
+				<p:column headerText=""> 
+ 					   
+	 				<h:commandLink value="#{msg['editar']}" action="#{controleProduto.editarProduto()}"> 
+	 					<f:setPropertyActionListener value="#{prod06}" 
+	 												 target="#{controleProduto.produtoSelecionado}" /> 
+	 				</h:commandLink> 				 
+	 				 
+	 				<h:outputLabel value=" "/> 
+	 				 
+	 				<h:commandLink value="#{msg['excluir']}"  
+	 							   action="#{controleProduto.excluirProduto()}"> 
+	 					<f:setPropertyActionListener value="#{prod06}" 
 	 												 target="#{controleProduto.produtoSelecionado}" /> 
 	 				</h:commandLink> 
  				 

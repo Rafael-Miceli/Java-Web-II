@@ -20,8 +20,12 @@
 		
 		<h:form>
 										
-			<p:dataTable value="#{controleProduto.listaProdutosComQuantidadeAcimaDeZero}" var="pro"
-				rendered="#{not empty controleProduto.listaProdutosComQuantidadeAcimaDeZero}"  >
+			<p:dataTable value="#{controleProduto.listaProdutos}" var="pro"
+				rendered="#{not empty controleProduto.listaProdutos}"  >
+				
+				<p:column>
+					<h:selectBooleanCheckbox value="#{controleProduto.checkedProdutoFornecedor[pro.codigo]}" />
+				</p:column>	
 				
 				<p:column headerText="#{msg['codigo']}">
 					<h:outputText value="#{pro.codigo}" />
@@ -33,22 +37,11 @@
 				
 				<p:column headerText="#{msg['categoria']}">
 					<h:outputText value="#{pro.categoria}" />
-				</p:column>			
-				
-				<p:column headerText="Quantidade">
-					<h:outputText value="#{pro.quantidade}" />
-				</p:column>	
-			
-				<p:column headerText=""> 
- 					   
-	 				<h:commandLink value="Escolher" action="#{controleProduto.escolherProduto()}"> 
-	 					<f:setPropertyActionListener value="#{pro}" 
-	 												 target="#{controleProduto.produtoSelecionado}" /> 
-	 				</h:commandLink> 				 
-	 				 				 
- 				</p:column> 
+				</p:column>
 
 			</p:dataTable>
+			
+			<h:commandButton value="Selecionar" action="#{controleProduto.salvarAlteracoesDeEntradaDeMercadoria}" />
 			
 		</h:form>
 		
