@@ -1,0 +1,40 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="conteudo">
+
+		<h2>#{msg['formulario.login']}</h2>
+		<h:form>
+			<table border="1">
+
+				<tr>
+					<td>#{msg['login']}</td>
+					<td><h:inputText value="#{controleLogin.usuario.login}"
+							required="true"
+							requiredMessage="#{msg['login.obrigatorio']}" /></td>
+				</tr>
+				<tr>
+					<td>#{msg['senha']}</td>
+					<td><h:inputSecret value="#{controleLogin.usuario.senha}"
+							required="true" 
+							requiredMessage="#{msg['senha.obrigatorio']}">
+
+						</h:inputSecret></td>
+				</tr>
+				<tr>
+					<td><h:commandButton value="Logar"
+							action="#{controleLogin.realizarLogin()}" /></td>
+				</tr>
+
+			</table>
+
+		</h:form>
+
+		<h:messages />
+
+	</ui:define>
+</ui:composition>
+

@@ -1,0 +1,55 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="conteudo">
+	
+		<br />
+	
+		<h:form>
+ 		 	<h:commandLink value="#{msg['sair']}" action="#{controleLogin.sairSistema()}" />
+ 		 	<br />
+ 		 </h:form>
+			
+		<h2>#{msg['listaCompradores.listaDecompradores']}</h2>	
+		<h:form>
+			<h:commandButton value="#{msg['listaCompradores.adicionarComprador']}" action="#{controlePessoa.adicionarComprador()}" />
+						
+			<h:dataTable value="#{controlePessoa.listaPessoas}" var="varPessoa"
+				rendered="#{not empty controlePessoa.listaPessoas}"  >
+			
+				<f:facet name="header">#{msg['listaCompradores.listaDecompradores']}</f:facet>
+				
+				<h:column>
+					<f:facet name="header">#{msg['nome']}</f:facet>
+					<h:outputText value="#{varPessoa.nome}" />
+				</h:column>		
+							
+				<h:column>
+					<f:facet name="header">Cpf</f:facet>
+					<h:outputText value="#{varPessoa.cpf}" />
+				</h:column>		
+					
+				<h:column headerText="#{msg['listaCompradores.acoes']}"> 
+ 					   
+ 				<h:commandLink value="#{msg['listaCompradores.editar']}" action="#{controlePessoa.editarComprador()}"> 
+ 					<f:setPropertyActionListener value="#{varPessoa}" 
+ 												 target="#{controlePessoa.pessoaSelecionada}" /> 
+ 				</h:commandLink> 				 
+ 				 
+ 				<h:outputLabel value=" "/> 
+ 				 
+ 				<h:commandLink value="#{msg['listaCompradores.excluir']}"  
+ 							   action="#{controlePessoa.excluirComprador()}"> 
+ 					<f:setPropertyActionListener value="#{varPessoa}" 
+ 												 target="#{controlePessoa.pessoaSelecionada}" /> 
+ 				</h:commandLink> 
+ 				 
+ 			</h:column> 
+
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

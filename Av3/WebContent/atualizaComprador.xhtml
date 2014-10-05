@@ -1,0 +1,46 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="conteudo">
+					
+		<h1>Atualiza Comprador</h1>		
+		
+		<h:form>
+
+				<h:panelGrid columns="2">
+
+
+					<h:outputLabel value="#{msg['nome']} : " for="campo-nome" />
+					<h:inputText value="#{controlePessoa.pessoaSelecionada.nome}"
+						id="campo-nome" required="true"
+						requiredMessage="#{msg['nome.obrigatorio']}" 
+					/>		
+					
+
+					<h:outputLabel value="Cpf : " for="campo-email" />
+					<h:inputText value="#{controlePessoa.pessoaSelecionada.cpf}"
+								 id="campo-email" 
+								 required="true"
+								 requiredMessage="#{msg['email.obrigatorio']}"
+								 validatorMessage="#{msg['email.incorreto']}">
+
+						
+						>
+					</h:inputText>		
+					
+					
+					<h:commandButton
+							value="#{msg['adicionarComprador.salvar']}"
+							action="#{controlePessoa.editar()}" 
+					/>
+					
+				</h:panelGrid>
+				
+			</h:form>
+
+			 <h:messages autoUpdate="true"/>
+	</ui:define>
+</ui:composition>
